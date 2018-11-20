@@ -13,6 +13,7 @@ class GameScene: SKScene {
     
     //private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+   let Ball2 = ball(Num: 163, Num2: 32)
     
     override func didMove(to view: SKView) {
         
@@ -37,9 +38,11 @@ class GameScene: SKScene {
         }
       
       
-      let Ball = ball(Num: 176, Num2: 21)
-      self.addChild(Ball)
-      Ball.ShowData()
+      //let Ball = ball(Num: 176, Num2: 21)
+      //self.addChild(Ball)
+      self.addChild(Ball2)
+      //Ball.ShowData()
+      Ball2.ShowData()
     }
     
     
@@ -57,6 +60,17 @@ class GameScene: SKScene {
             n.strokeColor = SKColor.blue
             self.addChild(n)
         }
+      
+      //今触れている相手を全て取得
+      let array = self.nodes(at: pos)
+      
+      //意中の相手だったら赤く染まる
+      for target in array{
+         if target == self {
+            print("touch ball2")
+            self.Ball2.color = UIColor.red
+         }
+      }
     }
     
     func touchUp(atPoint pos : CGPoint) {
@@ -77,6 +91,8 @@ class GameScene: SKScene {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+      
+      
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
