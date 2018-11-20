@@ -26,6 +26,20 @@ class HoldStage {
    
    init(Flame: Int) {
       self.StageFlame = Flame
+      SetStageNum()
+   }
+   
+   
+   public func SetStageNum() {
+      for x in 1 ... 4 {
+         for y in 1 ... 4 {
+            let RandNum: Int = Int(arc4random_uniform(4) + 1)
+            self.Stage[x][y] = RandNum
+         }
+      }
+      print("ステージを初期化しました。")
+      print("---Stage情報---")
+      print(self.Stage)
    }
    
    
@@ -41,27 +55,32 @@ class HoldStage {
       
       // 上を確認
       if self.Stage[x][y - 1] == Referee.CheckedNum {
+         print("上が一致")
          self.Referee.CountOfBall += 1
       }
       
       // 下を確認
       if self.Stage[x][y + 1] == Referee.CheckedNum {
+         print("下が一致")
          self.Referee.CountOfBall += 1
       }
       
       // 右を確認
-      if self.Stage[x][y] == Referee.CheckedNum {
+      if self.Stage[x + 1][y] == Referee.CheckedNum {
+         print("右が一致")
          self.Referee.CountOfBall += 1
       }
       
       // 左を確認
-      if self.Stage[x][y] == Referee.CheckedNum {
+      if self.Stage[x - 1][y] == Referee.CheckedNum {
+         print("左が一致")
          self.Referee.CountOfBall += 1
       }
       
       if self.Referee.CountOfBall > 0 {
          return true
       }
+      print("一致するものはありませんでした。")
       return false
    }
    
