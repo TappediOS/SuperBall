@@ -13,7 +13,8 @@ import SpriteKit
 
 class ball :SKSpriteNode {
    
-   private let SelfNumber: Int
+   public let SelfNumber: Int
+   private var Movement:Int
    public var PositionX: Int
    public var PositionY: Int
    
@@ -22,11 +23,18 @@ class ball :SKSpriteNode {
  
    init(BallPositionX: Int, BallPositionY: Int, BallColor: Int, ViewX: Int, ViewY: Int) {
       
-      //let texture = SKTexture(imageNamed: "One.png")
-      self.PositionX = BallPositionX
-      self.PositionY = BallPositionY
+      
+      let Wide = ViewX / 5
+      let Intarnal = ViewX / 25
+      let FirstZure = -ViewX * 2 / 5
+      let x1 = FirstZure + Intarnal * BallPositionX + Wide * (BallPositionX - 1)
+      let y1 = -ViewY * 3 / 8 + Intarnal * BallPositionY + Wide * (BallPositionY - 1)
       
       let texture: SKTexture
+      
+      self.PositionX = BallPositionX
+      self.PositionY = BallPositionY
+      self.Movement = Wide + Intarnal
       
       switch BallColor {
       case 1:
@@ -59,11 +67,7 @@ class ball :SKSpriteNode {
       
       self.isUserInteractionEnabled = true
 
-      let Wide = ViewX / 5
-      let Intarnal = ViewX / 25
-      let FirstZure = -ViewX * 2 / 5
-      let x1 = FirstZure + Intarnal * BallPositionX + Wide * (BallPositionX - 1)
-      let y1 = -ViewY * 3 / 8 + Intarnal * BallPositionY + Wide * (BallPositionY - 1)
+      
       self.position = CGPoint(x: x1, y: y1)
 
       
@@ -100,21 +104,36 @@ class ball :SKSpriteNode {
       return degree
    }
    
+   private func PostNotification(Vect: String){
+      
+      let SentObject: [String : Any] = ["SentX": self.PositionX as Int,
+                                        "SentY": self.PositionY as Int,
+                                        "Vect": Vect as String]
+      
+      print("")
+      NotificationCenter.default.post(name: .notifyName, object: nil, userInfo: SentObject)
+   }
+   
    private func SwipCheck(x: CGFloat, y: CGFloat) {
       
       switch WhereSwip(X: x, Y: y) {
       case -90 ..< -45:
          print("下にスワイプされたよ")
+         PostNotification(Vect: "Down")
       case -45 ..< 45:
          if(x >= 0){
             print("右にスワイプされたよ")
+            PostNotification(Vect: "Right")
          }else{
             print("左にスワイプされたよ")
+            PostNotification(Vect: "Left")
          }
       case 45 ... 90:
          print("上にスワイプされたよ")
+         PostNotification(Vect: "Up")
       default:
          print("上にスワイプされたよ(default)")
+         PostNotification(Vect: "Up")
       }
       
       print()
@@ -163,6 +182,24 @@ class ball :SKSpriteNode {
    }
    
    
-
+   public func MoveUp(MoveX: Int, MoveY: Int) {
+      self.PositionY += 1
+      self.position.x += CGFloat(Movement)
+   }
+   
+   public func MoveDown(MoveX: Int, MoveY: Int){
+      self.PositionY -= 1
+      self.position.x -= CGFloat(Movement)
+   }
+   
+   public func MoveRight(MoveX: Int, MoveY: Int) {
+      self.PositionX += 1
+      self.position.y += CGFloat(Movement)
+   }
+   
+   public func MoveLeft(MoveX: Int, MoveY: Int) {
+      self.PositionY -= 1
+      self.position.x -= CGFloat(Movement)
+   }
    
 }
