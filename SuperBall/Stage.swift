@@ -12,7 +12,7 @@ import UIKit
 class HoldStage {
 
    
-   private var Stage = [[-1, -1, -1, -1, -1, -1],
+   public var Stage = [[-1, -1, -1, -1, -1, -1],
                         [-1, -1, -1, -1, -1, -1],
                         [-1, -1, -1, -1, -1, -1],
                         [-1, -1, -1, -1, -1, -1],
@@ -21,14 +21,38 @@ class HoldStage {
    
    private let StageFlame: Int
    private var Referee = referee(Num: 0, Count: 0)
+   private var ViewSizeX : CGFloat = 0
+   private var ViewSizeY : CGFloat = 0
    
    
    
    init(Flame: Int) {
       self.StageFlame = Flame
       SetStageNum()
+      //SetStageBall()
    }
    
+   public func SetStageSizeX(SizeX: CGFloat){
+      self.ViewSizeX = SizeX
+      print("ビューの横幅：\(self.ViewSizeX)")
+      return
+   }
+   
+   public func SetStageSizeY(SizeY: CGFloat){
+      self.ViewSizeY = SizeY
+      print("ビューの縦幅：\(self.ViewSizeY)")
+      return
+   }
+   
+   private func SetStageBall() {
+      for x in 1 ... 4 {
+         for y in 1 ... 4 {
+            let StageNum: Int = self.Stage[x][y]
+            let Ball = ball(BallPositionX: x, BallPositionY: y, BallColor: StageNum)
+            Ball.name = "\(x)+\(y)"
+         }
+      }
+   }
    
    public func SetStageNum() {
       for x in 1 ... 4 {
@@ -39,7 +63,15 @@ class HoldStage {
       }
       print("ステージを初期化しました。")
       print("---Stage情報---")
-      print(self.Stage)
+      print("[")
+      for x in 1 ... 4 {
+         print("[ ", terminator: "")
+         for y in 1 ... 4 {
+            print("\(self.Stage[x][y]) " , terminator: "")
+         }
+         print("]")
+      }
+      print("]")
    }
    
    

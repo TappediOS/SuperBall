@@ -15,19 +15,45 @@ class ball :SKSpriteNode {
    
    private let SelfNumber: Int = Int(arc4random_uniform(5) + 1)
    public var PositionX: Int
-   //public var PositionY: Int
+   public var PositionY: Int
    
    public var TouchBegan: CGPoint!
    
  
-   init(Num: Int, Num2: Int) {
-      let texture = SKTexture(imageNamed: "man")
-      self.PositionX = Num
-      super.init(texture: nil, color: UIColor.cyan, size: texture.size())
+   init(BallPositionX: Int, BallPositionY: Int, BallColor: Int) {
+      
+      //let texture = SKTexture(imageNamed: "One.png")
+      self.PositionX = BallPositionX
+      self.PositionY = BallPositionY
+      
+      let texture: SKTexture
+      
+      switch BallColor {
+      case 1:
+         texture = SKTexture(imageNamed: "One.png")
+         break
+      case 2:
+         texture = SKTexture(imageNamed: "Two.png")
+         break
+      case 3:
+         texture = SKTexture(imageNamed: "Three.png")
+         break
+      case 4:
+         texture = SKTexture(imageNamed: "Four.png")
+         break
+      default:
+         print("BallNumber is \(BallColor)")
+         fatalError("BallNumber is NOT 1...4")
+         break;
+      }
+      
+      super.init(texture: texture, color: UIColor.cyan, size: texture.size())
       
       self.isUserInteractionEnabled = true
+      self.yScale /= 8
+      self.xScale /= 8
 
-      self.position = CGPoint(x: Num, y: Num2)
+      self.position = CGPoint(x: -400 + BallPositionX * 150 + BallPositionX / 2, y: -400 + BallPositionY * 150 + BallPositionY / 2)
 
       
       //PositionY = y
@@ -79,6 +105,9 @@ class ball :SKSpriteNode {
       default:
          print("上にスワイプされたよ(default)")
       }
+      
+      print()
+      return
   
    }
    
@@ -99,8 +128,11 @@ class ball :SKSpriteNode {
       self.color = UIColor.cyan
       
       if let TouchPoint = touches.first?.location(in: self) {
-         print("touch End Point = \(TouchPoint)")
-         SwipCheck(x: TouchPoint.x, y: TouchPoint.y)
+         var TmpPoint = TouchPoint
+         TmpPoint.x = TmpPoint.x - self.position.x
+         TmpPoint.y = TmpPoint.y - self.position.y
+         print("touch End Point = \(TmpPoint)")
+         SwipCheck(x: TmpPoint.x, y: TmpPoint.y)
          return
       }else{
          print("タッチ離したあと、Nilでした。")
