@@ -21,8 +21,8 @@ class HoldStage {
    
    private let StageFlame: Int
    private var Referee = referee(Num: 0, Count: 0)
-   private var ViewSizeX : CGFloat = 0
-   private var ViewSizeY : CGFloat = 0
+   public var ViewSizeX : CGFloat = 0
+   public var ViewSizeY : CGFloat = 0
    
    
    
@@ -44,20 +44,20 @@ class HoldStage {
       return
    }
    
-   private func SetStageBall() {
-      for x in 1 ... 4 {
-         for y in 1 ... 4 {
-            let StageNum: Int = self.Stage[x][y]
-            let Ball = ball(BallPositionX: x, BallPositionY: y, BallColor: StageNum)
-            Ball.name = "\(x)+\(y)"
-         }
-      }
-   }
+//   private func SetStageBall() {
+//      for x in 1 ... 4 {
+//         for y in 1 ... 4 {
+//            let StageNum: Int = self.Stage[x][y]
+//            let Ball = ball(BallPositionX: x, BallPositionY: y, BallColor: StageNum)
+//            Ball.name = "\(x)+\(y)"
+//         }
+//      }
+//   }
    
    public func SetStageNum() {
       for x in 1 ... 4 {
          for y in 1 ... 4 {
-            let RandNum: Int = Int(arc4random_uniform(4) + 1)
+            let RandNum: Int = Int(arc4random_uniform(5) + 1)
             self.Stage[x][y] = RandNum
          }
       }

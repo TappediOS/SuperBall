@@ -13,14 +13,14 @@ import SpriteKit
 
 class ball :SKSpriteNode {
    
-   private let SelfNumber: Int = Int(arc4random_uniform(5) + 1)
+   private let SelfNumber: Int
    public var PositionX: Int
    public var PositionY: Int
    
    public var TouchBegan: CGPoint!
    
  
-   init(BallPositionX: Int, BallPositionY: Int, BallColor: Int) {
+   init(BallPositionX: Int, BallPositionY: Int, BallColor: Int, ViewX: Int, ViewY: Int) {
       
       //let texture = SKTexture(imageNamed: "One.png")
       self.PositionX = BallPositionX
@@ -31,15 +31,23 @@ class ball :SKSpriteNode {
       switch BallColor {
       case 1:
          texture = SKTexture(imageNamed: "One.png")
+         self.SelfNumber = BallColor
          break
       case 2:
          texture = SKTexture(imageNamed: "Two.png")
+         self.SelfNumber = BallColor
          break
       case 3:
          texture = SKTexture(imageNamed: "Three.png")
+         self.SelfNumber = BallColor
          break
       case 4:
          texture = SKTexture(imageNamed: "Four.png")
+         self.SelfNumber = BallColor
+         break
+      case 5:
+         texture = SKTexture(imageNamed: "Five.png")
+         self.SelfNumber = BallColor
          break
       default:
          print("BallNumber is \(BallColor)")
@@ -47,13 +55,16 @@ class ball :SKSpriteNode {
          break;
       }
       
-      super.init(texture: texture, color: UIColor.cyan, size: texture.size())
+      super.init(texture: texture, color: UIColor.cyan, size: CGSize(width: CGFloat(ViewX / 5), height: CGFloat(ViewX / 5)))
       
       self.isUserInteractionEnabled = true
-      self.yScale /= 8
-      self.xScale /= 8
 
-      self.position = CGPoint(x: -400 + BallPositionX * 150 + BallPositionX / 2, y: -400 + BallPositionY * 150 + BallPositionY / 2)
+      let Wide = ViewX / 5
+      let Intarnal = ViewX / 25
+      let FirstZure = -ViewX * 2 / 5
+      let x1 = FirstZure + Intarnal * BallPositionX + Wide * (BallPositionX - 1)
+      let y1 = -ViewY * 3 / 8 + Intarnal * BallPositionY + Wide * (BallPositionY - 1)
+      self.position = CGPoint(x: x1, y: y1)
 
       
       //PositionY = y
@@ -112,8 +123,9 @@ class ball :SKSpriteNode {
    }
    
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      print("ballタッチしたよ")
-      self.color = UIColor.blue
+      print("--- ball info ---")
+      print("ball num is \(self.SelfNumber)")
+      print("ball posi is [\(self.PositionX)][\(self.PositionY)]")
 
 //      print("touch!")
 //      print("---event---")
@@ -124,7 +136,6 @@ class ball :SKSpriteNode {
    }
    
    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-      print("ballタッチ終わり")
       self.color = UIColor.cyan
       
       if let TouchPoint = touches.first?.location(in: self) {

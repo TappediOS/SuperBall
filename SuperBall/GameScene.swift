@@ -42,8 +42,18 @@ class GameScene: SKScene {
 //        }
 //
       //ビューの長さを取得
-      let ViewSizeX = self.view?.frame.width
-      let ViewSizeY = self.view?.frame.height
+      let ViewSizeX = self.scene?.frame.width
+      let ViewSizeY = self.scene?.frame.height
+      
+//      let size1 = view.frame.height
+//      let size2 = view.inputView?.frame.height
+//      let size3 = view.frame.height
+//      let size5 = self.scene?.frame.height
+//      print("size1:\(size1)")
+//      print("size2:\(size2)")
+//      print("size3:\(size3)")
+//      print("size4:\(ViewSizeY)")
+//      print("size5:\(size5)")
       
       InitStageSize(SizeX: ViewSizeX, SizeY: ViewSizeY)
       
@@ -72,7 +82,7 @@ class GameScene: SKScene {
       for x in 1 ... 4 {
          for y in 1 ... 4 {
             let StageNum: Int = OpenStage.Stage[x][y]
-            let Ball = ball(BallPositionX: x, BallPositionY: y, BallColor: StageNum)
+            let Ball = ball(BallPositionX: x, BallPositionY: y, BallColor: StageNum, ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY))
             Ball.name = "\(x)+\(y)"
             addChild(Ball)
          }
@@ -86,6 +96,7 @@ class GameScene: SKScene {
 //            n.strokeColor = SKColor.green
 //            self.addChild(n)
 //        }
+      print("Tap Point is \(pos)")
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -109,7 +120,7 @@ class GameScene: SKScene {
 //            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
 //        }
       
-//        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
