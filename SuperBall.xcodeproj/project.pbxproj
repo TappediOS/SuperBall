@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2A0BD1C42E8792BC359956 /* Pods_SuperBall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821BE7C5252BB594BA34419C /* Pods_SuperBall.framework */; };
 		BF1F224921A3AEF70021DB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F224821A3AEF70021DB8F /* AppDelegate.swift */; };
 		BF1F224B21A3AEF70021DB8F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF1F224A21A3AEF70021DB8F /* GameScene.sks */; };
 		BF1F224D21A3AEF70021DB8F /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = BF1F224C21A3AEF70021DB8F /* Actions.sks */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48E80E58BB5DDE6275EA5DC5 /* Pods-SuperBall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall.debug.xcconfig"; sourceTree = "<group>"; };
+		821BE7C5252BB594BA34419C /* Pods_SuperBall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SuperBall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1F224521A3AEF70021DB8F /* SuperBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1F224821A3AEF70021DB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF1F224A21A3AEF70021DB8F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		BF1F226221A3AFB40021DB8F /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		BF1F226421A3AFCE0021DB8F /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referee.swift; sourceTree = "<group>"; };
 		BF1F226621A542110021DB8F /* ExNotiificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExNotiificationName.swift; sourceTree = "<group>"; };
+		CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +47,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2A0BD1C42E8792BC359956 /* Pods_SuperBall.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		322F99AFDF4A702679769B36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				821BE7C5252BB594BA34419C /* Pods_SuperBall.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA157733239B5DDF5A993F78 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				48E80E58BB5DDE6275EA5DC5 /* Pods-SuperBall.debug.xcconfig */,
+				CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BF1F223C21A3AEF70021DB8F = {
 			isa = PBXGroup;
 			children = (
 				BF1F224721A3AEF70021DB8F /* SuperBall */,
 				BF1F224621A3AEF70021DB8F /* Products */,
+				BA157733239B5DDF5A993F78 /* Pods */,
+				322F99AFDF4A702679769B36 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,9 +116,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF1F225D21A3AEF70021DB8F /* Build configuration list for PBXNativeTarget "SuperBall" */;
 			buildPhases = (
+				003729087B1798CC60FDA296 /* [CP] Check Pods Manifest.lock */,
 				BF1F224121A3AEF70021DB8F /* Sources */,
 				BF1F224221A3AEF70021DB8F /* Frameworks */,
 				BF1F224321A3AEF70021DB8F /* Resources */,
+				A2B336DFCC0ACEF24BD97E13 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,6 +178,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		003729087B1798CC60FDA296 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SuperBall-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2B336DFCC0ACEF24BD97E13 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Animo/Animo.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Animo.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BF1F224121A3AEF70021DB8F /* Sources */ = {
@@ -308,6 +381,7 @@
 		};
 		BF1F225E21A3AEF70021DB8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48E80E58BB5DDE6275EA5DC5 /* Pods-SuperBall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -326,6 +400,7 @@
 		};
 		BF1F225F21A3AEF70021DB8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

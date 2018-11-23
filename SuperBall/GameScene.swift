@@ -120,6 +120,8 @@ class GameScene: SKScene {
          print("")
       }
       print("")
+      
+      ShowAllBall()
    }
    
    private func AbleToMoveBall(FirstX: Int, FirstY: Int, Vect: String) -> Bool{
@@ -139,13 +141,13 @@ class GameScene: SKScene {
          break
       case "Right":
          if FirstX == 4{
-            print("\n左には移動できません")
+            print("\n右には移動できません")
             return false
          }
          break
       case "Left":
          if FirstY == 1{
-            print("\n右には移動できません")
+            print("\n左には移動できません")
             return false
          }
          break
@@ -209,20 +211,20 @@ class GameScene: SKScene {
       
       switch Vect {
       case "Up":
-         AllBall[FirstX][FirstY - 1].MoveUp(MoveX: FirstX, MoveY: FirstY)
-         AllBall[SecondX][SecondY - 1].MoveDown(MoveX: SecondX, MoveY: SecondY)
+         AllBall[FirstX][FirstY - 1].MoveUp(MoveX: FirstX, MoveY: FirstY, First: true)
+         AllBall[SecondX][SecondY - 1].MoveDown(MoveX: SecondX, MoveY: SecondY, First: false)
          break
       case "Down":
-         AllBall[FirstX][FirstY - 1].MoveDown(MoveX: FirstX, MoveY: FirstY)
-         AllBall[SecondX][SecondY - 1].MoveUp(MoveX: SecondX, MoveY: SecondY)
+         AllBall[FirstX][FirstY - 1].MoveDown(MoveX: FirstX, MoveY: FirstY, First: true)
+         AllBall[SecondX][SecondY - 1].MoveUp(MoveX: SecondX, MoveY: SecondY, First: false)
          break
       case "Right":
-         AllBall[FirstX][FirstY - 1].MoveRight(MoveX: FirstX, MoveY: FirstY)
-         AllBall[SecondX][SecondY - 1].MoveLeft(MoveX: SecondX, MoveY: SecondY)
+         AllBall[FirstX][FirstY - 1].MoveRight(MoveX: FirstX, MoveY: FirstY, First: true)
+         AllBall[SecondX][SecondY - 1].MoveLeft(MoveX: SecondX, MoveY: SecondY, First: false)
          break
       case "Left":
-         AllBall[FirstX][FirstY - 1].MoveLeft(MoveX: FirstX, MoveY: FirstY)
-         AllBall[SecondX][SecondY - 1].MoveRight(MoveX: SecondX, MoveY: SecondY)
+         AllBall[FirstX][FirstY - 1].MoveLeft(MoveX: FirstX, MoveY: FirstY, First: true)
+         AllBall[SecondX][SecondY - 1].MoveRight(MoveX: SecondX, MoveY: SecondY, First: false)
          break
       default:
          fatalError("変な方向送られてきた。")
@@ -245,9 +247,25 @@ class GameScene: SKScene {
       
       PrintMoveInfo(FirstX: FirstX, FirstY: FirstY, SecondX: SecondX, SecondY: SecondY)
       MoveDoubleBall(FirstX: FirstX, FirstY: FirstY, SecondX: SecondX, SecondY: SecondY, Vect: Vect)
+      ShowAllBall()
       return
    }
    
+   
+   private func ShowAllBall(){
+      
+      print("\n--- All Ball Into ---")
+      
+      for y in (0...3).reversed(){
+         print("[", terminator: "")
+         for x in 1 ... 4 {
+            print(" \(AllBall[x][y].SelfNumber)", terminator: "")
+         }
+         print(" ]")
+      }
+      print("--------------------")
+      return
+   }
    
    @objc func CatchNotification(notification: Notification) -> Void {
       print("--- Catch notification ---")
@@ -257,7 +275,7 @@ class GameScene: SKScene {
          let SentedY = userInfo["SentY"] as! Int
          let Vect = userInfo["Vect"] as! String
          print("\nSentedX = \(SentedX)")
-         print("SentedX = \(SentedY)")
+         print("SentedY = \(SentedY)")
          print("Vect = \(Vect)")
          CheckMoveDoubleBall(FirstX: SentedX, FirstY: SentedY, Vect: Vect)
       }else{

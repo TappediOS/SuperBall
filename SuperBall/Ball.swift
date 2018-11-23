@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SpriteKit
+import Animo
 
 
 class ball :SKSpriteNode {
@@ -17,8 +18,9 @@ class ball :SKSpriteNode {
    private var Movement:Int
    public var PositionX: Int
    public var PositionY: Int
+   private let AnimateioSpeed = 0.34
    
-   public var TouchBegan: CGPoint!
+   public var TouchBegan: CGPoint
    
  
    init(BallPositionX: Int, BallPositionY: Int, BallColor: Int, ViewX: Int, ViewY: Int) {
@@ -35,6 +37,7 @@ class ball :SKSpriteNode {
       self.PositionX = BallPositionX
       self.PositionY = BallPositionY
       self.Movement = Wide + Intarnal
+      self.TouchBegan = CGPoint(x: 0, y: 0)
       
       switch BallColor {
       case 1:
@@ -145,6 +148,14 @@ class ball :SKSpriteNode {
       print("--- ball info ---")
       print("ball num is \(self.SelfNumber)")
       print("ball posi is [\(self.PositionX)][\(self.PositionY)]")
+      
+      if let TouchStartPoint = touches.first?.location(in: self) {
+         self.TouchBegan = TouchStartPoint
+         print("touch Start Point = \(self.TouchBegan)")
+      }else{
+         print("タッチ離したとき、Nilでした。")
+         return
+      }
 
 //      print("touch!")
 //      print("---event---")
@@ -157,10 +168,10 @@ class ball :SKSpriteNode {
    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
       self.color = UIColor.cyan
       
-      if let TouchPoint = touches.first?.location(in: self) {
-         var TmpPoint = TouchPoint
-         TmpPoint.x = TmpPoint.x - self.position.x
-         TmpPoint.y = TmpPoint.y - self.position.y
+      if let TouchEndPoint = touches.first?.location(in: self) {
+         var TmpPoint = TouchEndPoint
+         TmpPoint.x = TmpPoint.x - self.TouchBegan.x
+         TmpPoint.y = TmpPoint.y - self.TouchBegan.y
          print("touch End Point = \(TmpPoint)")
          SwipCheck(x: TmpPoint.x, y: TmpPoint.y)
          return
@@ -181,25 +192,59 @@ class ball :SKSpriteNode {
       self.color = UIColor.blue
    }
    
+   private func AfterMoveInfo(First: Bool) {
+      
+      if First == true {
+         print("Firstの位置情報")
+         print("First[\(self.PositionX)][\(self.PositionY)]")
+      }else{
+         print("Secondの位置情報")
+         print("Second[\(self.PositionX)][\(self.PositionY)]")
+      }
+      print("")
+      return
+      
+   }
    
-   public func MoveUp(MoveX: Int, MoveY: Int) {
+   public func MoveUp(MoveX: Int, MoveY: Int, First: Bool) {
       self.PositionY += 1
-      self.position.x += CGFloat(Movement)
+      
+      let MovePoint = CGPoint(x: self.position.x, y: self.position.y + CGFloat(Movement))
+      let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      self.run(Aktion)
+      
+      
+      AfterMoveInfo(First: First)
    }
    
-   public func MoveDown(MoveX: Int, MoveY: Int){
+   public func MoveDown(MoveX: Int, MoveY: Int, First: Bool){
       self.PositionY -= 1
-      self.position.x -= CGFloat(Movement)
+      
+      let MovePoint = CGPoint(x: self.position.x, y: self.position.y - CGFloat(Movement))
+      let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      self.run(Aktion)
+      
+      AfterMoveInfo(First: First)
    }
    
-   public func MoveRight(MoveX: Int, MoveY: Int) {
+   public func MoveRight(MoveX: Int, MoveY: Int, First: Bool) {
       self.PositionX += 1
-      self.position.y += CGFloat(Movement)
+      
+      let MovePoint = CGPoint(x: self.position.x + CGFloat(Movement), y: self.position.y)
+      let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      self.run(Aktion)
+      
+      AfterMoveInfo(First: First)
    }
    
-   public func MoveLeft(MoveX: Int, MoveY: Int) {
+   public func MoveLeft(MoveX: Int, MoveY: Int, First: Bool) {
       self.PositionY -= 1
-      self.position.x -= CGFloat(Movement)
+      
+      let MovePoint = CGPoint(x: self.position.x - CGFloat(Movement), y: self.position.y)
+      let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      self.run(Aktion)
+      
+      AfterMoveInfo(First: First)
    }
    
 }
