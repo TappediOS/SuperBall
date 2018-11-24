@@ -18,10 +18,14 @@ class ball :SKSpriteNode {
    private var Movement:Int
    public var PositionX: Int
    public var PositionY: Int
-   private let AnimateioSpeed = 0.34
+   private let AnimateioSpeed = 0.22
    
    public var TouchBegan: CGPoint
+   private var AreYouMoved: Bool = true
+   private var AreYouLarge: Bool = false
    
+   private var AfterMovedPointX: CGFloat
+   private var AfterMovedPointY: CGFloat
  
    init(BallPositionX: Int, BallPositionY: Int, BallColor: Int, ViewX: Int, ViewY: Int) {
       
@@ -38,6 +42,9 @@ class ball :SKSpriteNode {
       self.PositionY = BallPositionY
       self.Movement = Wide + Intarnal
       self.TouchBegan = CGPoint(x: 0, y: 0)
+      
+      self.AfterMovedPointX = x1
+      self.AfterMovedPointY = y1
       
       switch BallColor {
       case 1:
@@ -144,35 +151,74 @@ class ball :SKSpriteNode {
   
    }
    
+   private func LargeAnimation() {
+      
+      if self.AreYouLarge == false {
+         let Large: SKAction = SKAction.scale(by: 1.2, duration: 0.2)
+         self.run(Large)
+         self.AreYouLarge = true
+         return
+      }
+   }
+   
+   private func SmallAnimateion() {
+      
+      if self.AreYouLarge == true {
+         let Small: SKAction = SKAction.scale(by: 1 / 1.2, duration: 0.2)
+         self.run(Small)
+         self.AreYouLarge = false
+         return
+      }
+   }
+   
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+      print("AreYouMoved = \(self.AreYouMoved)")
+      
+      guard self.AreYouMoved == true else {
+         print("移動中です。(StartPoint)")
+         return
+      }
+      
+      
       print("--- ball info ---")
       print("ball num is \(self.SelfNumber)")
       print("ball posi is [\(self.PositionX)][\(self.PositionY)]")
       
+      
+      
+      
       if let TouchStartPoint = touches.first?.location(in: self) {
          self.TouchBegan = TouchStartPoint
          print("touch Start Point = \(self.TouchBegan)")
+         LargeAnimation()
       }else{
          print("タッチ離したとき、Nilでした。")
-         return
       }
-
-//      print("touch!")
-//      print("---event---")
-//      print(event)
-//      print("touches")
-//      print(touches)
-
+      
+      return
    }
    
    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.color = UIColor.cyan
+     
+      guard self.AreYouMoved == true else {
+         print("移動中です。(EndPoint)")
+         return
+      }
+      
+      self.AreYouMoved = false
       
       if let TouchEndPoint = touches.first?.location(in: self) {
          var TmpPoint = TouchEndPoint
          TmpPoint.x = TmpPoint.x - self.TouchBegan.x
          TmpPoint.y = TmpPoint.y - self.TouchBegan.y
-         print("touch End Point = \(TmpPoint)")
+         print("touch End Point = \(TouchEndPoint)")
+         SmallAnimateion()
+         if LengthOfTwoPoint(Start: TouchBegan, End: TouchEndPoint) == false {
+            print("移動はしません")
+            self.AbleToMove()
+            return
+         }
          SwipCheck(x: TmpPoint.x, y: TmpPoint.y)
          return
       }else{
@@ -185,7 +231,6 @@ class ball :SKSpriteNode {
    
    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
      // print("ballタッチが動いてる")
-      self.color = UIColor.white
    }
    
    public func ChangeColor() {
@@ -207,44 +252,84 @@ class ball :SKSpriteNode {
    }
    
    public func MoveUp(MoveX: Int, MoveY: Int, First: Bool) {
+      
+      self.AreYouMoved = false
       self.PositionY += 1
       
       let MovePoint = CGPoint(x: self.position.x, y: self.position.y + CGFloat(Movement))
       let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
-      self.run(Aktion)
-      
+      let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
+         self?.AbleToMove()
+      }) ])
+      self.run(action)
       
       AfterMoveInfo(First: First)
+
    }
    
    public func MoveDown(MoveX: Int, MoveY: Int, First: Bool){
+      
+      self.AreYouMoved = false
       self.PositionY -= 1
       
       let MovePoint = CGPoint(x: self.position.x, y: self.position.y - CGFloat(Movement))
       let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
-      self.run(Aktion)
+      let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
+         self?.AbleToMove()
+      }) ])
+      self.run(action)
       
       AfterMoveInfo(First: First)
+
    }
    
    public func MoveRight(MoveX: Int, MoveY: Int, First: Bool) {
+      
+      self.AreYouMoved = false
       self.PositionX += 1
       
       let MovePoint = CGPoint(x: self.position.x + CGFloat(Movement), y: self.position.y)
       let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
-      self.run(Aktion)
-      
+      let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
+         self?.AbleToMove()
+      }) ])
+      self.run(action)
       AfterMoveInfo(First: First)
    }
    
    public func MoveLeft(MoveX: Int, MoveY: Int, First: Bool) {
-      self.PositionY -= 1
+      
+      self.AreYouMoved = false
+      self.PositionX -= 1
       
       let MovePoint = CGPoint(x: self.position.x - CGFloat(Movement), y: self.position.y)
       let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
-      self.run(Aktion)
-      
+      let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
+         self?.AbleToMove()
+      }) ])
+      self.run(action)
       AfterMoveInfo(First: First)
+   }
+   
+   public func AbleToMove(){
+      print("動けるようになりました。")
+      self.AreYouMoved = true
+      return
+   }
+   
+   private func LengthOfTwoPoint(Start: CGPoint, End: CGPoint) -> Bool {
+   
+      let xDistance = Start.x - End.x
+      let yDistance = Start.y - End.y
+      let distance = sqrtf(Float(xDistance*xDistance + yDistance*yDistance))
+      
+      print("2点間の距離は\(distance)")
+      
+      if distance < 55 {
+         return false
+      }
+      
+      return true
    }
    
 }

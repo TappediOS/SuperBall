@@ -18,46 +18,18 @@ class GameScene: SKScene {
    private let OpenStage = HoldStage(Flame: 1)
     
     override func didMove(to view: SKView) {
-        
-        // Get label node from scene and store it for use later
-//        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-//        if let label = self.label {
-//            label.alpha = 0.0
-//            label.run(SKAction.fadeIn(withDuration: 2.0))
-//        }
-      
-        // Create shape node to use during mouse interaction
-//        let w = (self.size.width + self.size.height) * 0.05
-//        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-//
-//        if let spinnyNode = self.spinnyNode {
-//            spinnyNode.lineWidth = 2.5
-//
-//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-//                                              SKAction.fadeOut(withDuration: 0.5),
-//                                              SKAction.removeFromParent()]))
-//        }
-//
+
       //ビューの長さを取得
       let ViewSizeX = self.scene?.frame.width
       let ViewSizeY = self.scene?.frame.height
       
-//      let size1 = view.frame.height
-//      let size2 = view.inputView?.frame.height
-//      let size3 = view.frame.height
-//      let size5 = self.scene?.frame.height
-//      print("size1:\(size1)")
-//      print("size2:\(size2)")
-//      print("size3:\(size3)")
-//      print("size4:\(ViewSizeY)")
-//      print("size5:\(size5)")
+      //view.backgroundColor = UIColor.white
+      //self.backgroundColor = UIColor.white
       
       InitStageSize(SizeX: ViewSizeX, SizeY: ViewSizeY)
       SetStageBall()
       
-      NotificationCenter.default.addObserver(self, selector: #selector(CatchNotification(notification:)), name: .notifyName, object: nil)
-      
+      NotificationCenter.default.addObserver(self, selector: #selector(CatchNotification(notification:)), name: .notifyName, object: nil)      
     }
    
    private func InitStageSize(SizeX: CGFloat?, SizeY: CGFloat?){
@@ -146,7 +118,7 @@ class GameScene: SKScene {
          }
          break
       case "Left":
-         if FirstY == 1{
+         if FirstX == 1{
             print("\n左には移動できません")
             return false
          }
@@ -239,6 +211,7 @@ class GameScene: SKScene {
    private func CheckMoveDoubleBall(FirstX: Int, FirstY: Int, Vect: String){
       
       if AbleToMoveBall(FirstX: FirstX, FirstY: FirstY, Vect: Vect) == false {
+         AllBall[FirstX][FirstY - 1].AbleToMove()
          return
       }
       
