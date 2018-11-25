@@ -10,29 +10,41 @@ import Foundation
 import UIKit
 import SpriteKit
 import Animo
+import AudioToolbox
+
 
 
 class ball :SKSpriteNode {
    
    public let SelfNumber: Int
-   private var Movement:Int
+   private var Movement:Int      //動く距離を表す
    public var PositionX: Int
    public var PositionY: Int
-   private let AnimateioSpeed = 0.22
+   private let AnimateioSpeed = 0.22   //動く際のアニメーションスピード
    
    public var TouchBegan: CGPoint
    private var AreYouMoved: Bool = true
-   private var AreYouLarge: Bool = false
+   private var AreYouLarge: Bool = false     //大きい状態かどうか
    
-   private var AfterMovedPointX: CGFloat
-   private var AfterMovedPointY: CGFloat
+   private var AfterMovedPointX: CGFloat     //移動した後の座標X
+   private var AfterMovedPointY: CGFloat     //これがないと移動後に位置がずれる
  
+   
+   
+   /// クラスの初期化
+   ///
+   /// - Parameters:
+   ///   - BallPositionX: X座標
+   ///   - BallPositionY: Y座標
+   ///   - BallColor: ボールの番号(画像)
+   ///   - ViewX: 使用しているデバイスのWideを表す。
+   ///   - ViewY: 使用しているデバイスのheightを表す
    init(BallPositionX: Int, BallPositionY: Int, BallColor: Int, ViewX: Int, ViewY: Int) {
       
       
       let Wide = ViewX / 5
       let Intarnal = ViewX / 25
-      let FirstZure = -ViewX * 2 / 5
+      let FirstZure = -ViewX * 2 / 5   //位置ズレ防止
       let x1 = FirstZure + Intarnal * BallPositionX + Wide * (BallPositionX - 1)
       let y1 = -ViewY * 3 / 8 + Intarnal * BallPositionY + Wide * (BallPositionY - 1)
       
@@ -43,9 +55,10 @@ class ball :SKSpriteNode {
       self.Movement = Wide + Intarnal
       self.TouchBegan = CGPoint(x: 0, y: 0)
       
-      self.AfterMovedPointX = x1
-      self.AfterMovedPointY = y1
+      self.AfterMovedPointX = CGFloat(x1)
+      self.AfterMovedPointY = CGFloat(y1)
       
+      //ここで画像を選択。
       switch BallColor {
       case 1:
          texture = SKTexture(imageNamed: "One.png")
@@ -75,9 +88,10 @@ class ball :SKSpriteNode {
       
       super.init(texture: texture, color: UIColor.cyan, size: CGSize(width: CGFloat(ViewX / 5), height: CGFloat(ViewX / 5)))
       
+      //ノードがタッチできる状態にする。
       self.isUserInteractionEnabled = true
 
-      
+      //ポジションの設定。
       self.position = CGPoint(x: x1, y: y1)
 
       
@@ -90,6 +104,7 @@ class ball :SKSpriteNode {
       fatalError("init(coder:) has not been implemented")
    }
    
+   
    func ShowData() {
       print("Ball.position = \(self.position)")
       print("Ball.size = \(self.size)")
@@ -99,6 +114,14 @@ class ball :SKSpriteNode {
 
    }
    
+   
+   
+   /// スワイプされた角度を求める
+   ///
+   /// - Parameters:
+   ///   - X: 横にどれだけ移動しているか。
+   ///   - Y: 縦にどれだけ移動したのか。
+   /// - Returns: スワイプされた角度を変えす
    private func WhereSwip(X: CGFloat, Y: CGFloat) -> Int {
      
       var degree:Int
@@ -114,6 +137,10 @@ class ball :SKSpriteNode {
       return degree
    }
    
+   
+   /// スワイプされた情報をGameSceneに送信する関数
+   ///
+   /// - Parameter Vect: スワイプ方向
    private func PostNotification(Vect: String){
       
       let SentObject: [String : Any] = ["SentX": self.PositionX as Int,
@@ -124,6 +151,12 @@ class ball :SKSpriteNode {
       NotificationCenter.default.post(name: .notifyName, object: nil, userInfo: SentObject)
    }
    
+   
+   /// スワイプされた方向をNotificationに送信する
+   ///
+   /// - Parameters:
+   ///   - X: 横にどれだけ移動しているか。
+   ///   - Y: 縦にどれだけ移動したのか。
    private func SwipCheck(x: CGFloat, y: CGFloat) {
       
       switch WhereSwip(X: x, Y: y) {
@@ -151,8 +184,11 @@ class ball :SKSpriteNode {
   
    }
    
+   
+   /// ノードを大きくする関数
    private func LargeAnimation() {
       
+      //Large状態でなければ大きくする。
       if self.AreYouLarge == false {
          let Large: SKAction = SKAction.scale(by: 1.2, duration: 0.2)
          self.run(Large)
@@ -160,9 +196,11 @@ class ball :SKSpriteNode {
          return
       }
    }
-   
+ 
+   /// ノードを小さくする関数
    private func SmallAnimateion() {
       
+      //Large状態であれば小さくする
       if self.AreYouLarge == true {
          let Small: SKAction = SKAction.scale(by: 1 / 1.2, duration: 0.2)
          self.run(Small)
@@ -179,15 +217,13 @@ class ball :SKSpriteNode {
          print("移動中です。(StartPoint)")
          return
       }
-      
+      AudioServicesPlaySystemSound(1519)
       
       print("--- ball info ---")
       print("ball num is \(self.SelfNumber)")
       print("ball posi is [\(self.PositionX)][\(self.PositionY)]")
       
-      
-      
-      
+    
       if let TouchStartPoint = touches.first?.location(in: self) {
          self.TouchBegan = TouchStartPoint
          print("touch Start Point = \(self.TouchBegan)")
@@ -256,7 +292,12 @@ class ball :SKSpriteNode {
       self.AreYouMoved = false
       self.PositionY += 1
       
-      let MovePoint = CGPoint(x: self.position.x, y: self.position.y + CGFloat(Movement))
+      let MovePoint = CGPoint(x: self.AfterMovedPointX, y: self.AfterMovedPointY + CGFloat(Movement))
+      
+      self.AfterMovedPointY = MovePoint.y
+      
+      AudioServicesPlaySystemSound(1519)
+      
       let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
@@ -264,7 +305,6 @@ class ball :SKSpriteNode {
       self.run(action)
       
       AfterMoveInfo(First: First)
-
    }
    
    public func MoveDown(MoveX: Int, MoveY: Int, First: Bool){
@@ -272,7 +312,12 @@ class ball :SKSpriteNode {
       self.AreYouMoved = false
       self.PositionY -= 1
       
-      let MovePoint = CGPoint(x: self.position.x, y: self.position.y - CGFloat(Movement))
+      let MovePoint = CGPoint(x: self.AfterMovedPointX, y: self.AfterMovedPointY - CGFloat(Movement))
+      
+      self.AfterMovedPointY = MovePoint.y
+      
+      AudioServicesPlaySystemSound(1519)
+      
       let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
@@ -288,7 +333,12 @@ class ball :SKSpriteNode {
       self.AreYouMoved = false
       self.PositionX += 1
       
-      let MovePoint = CGPoint(x: self.position.x + CGFloat(Movement), y: self.position.y)
+      let MovePoint = CGPoint(x: self.AfterMovedPointX + CGFloat(Movement), y: AfterMovedPointY)
+      
+      self.AfterMovedPointX = MovePoint.x
+      
+      AudioServicesPlaySystemSound(1519)
+      
       let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
@@ -301,8 +351,12 @@ class ball :SKSpriteNode {
       
       self.AreYouMoved = false
       self.PositionX -= 1
+      let MovePoint = CGPoint(x: self.AfterMovedPointX - CGFloat(Movement), y: AfterMovedPointY)
       
-      let MovePoint = CGPoint(x: self.position.x - CGFloat(Movement), y: self.position.y)
+      self.AfterMovedPointX = MovePoint.x
+      
+      AudioServicesPlaySystemSound(1519)
+      
       let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
@@ -317,6 +371,13 @@ class ball :SKSpriteNode {
       return
    }
    
+   
+   /// 2点間の距離を求め、距離が十分であるかどうか調べる
+   ///
+   /// - Parameters:
+   ///   - Start: 始点
+   ///   - End: 終点
+   /// - Returns: 一定以上ならばtrueを返す。
    private func LengthOfTwoPoint(Start: CGPoint, End: CGPoint) -> Bool {
    
       let xDistance = Start.x - End.x
