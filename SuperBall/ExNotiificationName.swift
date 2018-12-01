@@ -9,5 +9,7 @@
 import Foundation
 
 extension Notification.Name {
-   static let notifyName = Notification.Name("notifyName")
+   static let MoveBall = Notification.Name("MoveBall")
+   static let FinishMove = Notification.Name("FinishMove")
+   
 }

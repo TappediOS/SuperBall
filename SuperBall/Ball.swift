@@ -11,6 +11,7 @@ import UIKit
 import SpriteKit
 import Animo
 import AudioToolbox
+import SpriteKitEasingSwift
 
 
 
@@ -20,7 +21,7 @@ class ball :SKSpriteNode {
    private var Movement:Int      //動く距離を表す
    public var PositionX: Int
    public var PositionY: Int
-   private let AnimateioSpeed = 0.22   //動く際のアニメーションスピード
+   private let AnimateioSpeed = 0.185   //動く際のアニメーションスピード
    
    public var TouchBegan: CGPoint
    private var AreYouMoved: Bool = true
@@ -28,6 +29,8 @@ class ball :SKSpriteNode {
    
    private var AfterMovedPointX: CGFloat     //移動した後の座標X
    private var AfterMovedPointY: CGFloat     //これがないと移動後に位置がずれる
+   
+   public var YouAreJustDead = false
  
    
    
@@ -80,6 +83,14 @@ class ball :SKSpriteNode {
          texture = SKTexture(imageNamed: "Five.png")
          self.SelfNumber = BallColor
          break
+      case 6:
+         texture = SKTexture(imageNamed: "Six.png")
+         self.SelfNumber = BallColor
+         break
+      case 7:
+         texture = SKTexture(imageNamed: "Seven.png")
+         self.SelfNumber = BallColor
+         break
       default:
          print("BallNumber is \(BallColor)")
          fatalError("BallNumber is NOT 1...4")
@@ -94,10 +105,6 @@ class ball :SKSpriteNode {
       //ポジションの設定。
       self.position = CGPoint(x: x1, y: y1)
 
-      
-      //PositionY = y
-      //position = CGPoint(node.position.x, node.position.y + 10)
-      //self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(10, 10))
    }
    
    required init?(coder aDecoder: NSCoder) {
@@ -148,7 +155,15 @@ class ball :SKSpriteNode {
                                         "Vect": Vect as String]
       
       print("")
-      NotificationCenter.default.post(name: .notifyName, object: nil, userInfo: SentObject)
+      NotificationCenter.default.post(name: .MoveBall, object: nil, userInfo: SentObject)
+   }
+   
+   private func FinishMovePostMotification() {
+      
+      let SentObject: [String : Any] = ["x": self.PositionX as Int,
+                                        "y": self.PositionY as Int]
+      print("")
+      NotificationCenter.default.post(name: .FinishMove, object: nil, userInfo: SentObject)
    }
    
    
@@ -213,6 +228,11 @@ class ball :SKSpriteNode {
 
       print("AreYouMoved = \(self.AreYouMoved)")
       
+      guard self.YouAreJustDead == false else {
+         print("動けません。消えます")
+         return
+      }
+      
       guard self.AreYouMoved == true else {
          print("移動中です。(StartPoint)")
          return
@@ -239,6 +259,11 @@ class ball :SKSpriteNode {
      
       guard self.AreYouMoved == true else {
          print("移動中です。(EndPoint)")
+         return
+      }
+      
+      guard self.YouAreJustDead == false else {
+         print("動けません。消えます")
          return
       }
       
@@ -298,7 +323,11 @@ class ball :SKSpriteNode {
       
       AudioServicesPlaySystemSound(1519)
       
-      let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      //let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      
+      let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
+      
+      
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
       }) ])
@@ -318,7 +347,7 @@ class ball :SKSpriteNode {
       
       AudioServicesPlaySystemSound(1519)
       
-      let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
       }) ])
@@ -339,7 +368,7 @@ class ball :SKSpriteNode {
       
       AudioServicesPlaySystemSound(1519)
       
-      let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
       }) ])
@@ -357,7 +386,7 @@ class ball :SKSpriteNode {
       
       AudioServicesPlaySystemSound(1519)
       
-      let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
+      let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
       }) ])
@@ -368,8 +397,21 @@ class ball :SKSpriteNode {
    public func AbleToMove(){
       print("動けるようになりました。")
       self.AreYouMoved = true
+      self.FinishMovePostMotification()
       return
    }
+   
+   
+   
+   public func RemoveBall() {
+      let FadeOut = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeIn, time: 0.143, fromValue: 1, toValue: 0)
+      let Remove = SKAction.removeFromParent()
+      let FadeAction = SKAction.sequence([FadeOut, Remove])
+      
+      self.run(FadeAction)
+   }
+   
+   
    
    
    /// 2点間の距離を求め、距離が十分であるかどうか調べる

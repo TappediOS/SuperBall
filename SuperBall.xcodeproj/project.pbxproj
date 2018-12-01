@@ -212,12 +212,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Animo/Animo.framework",
+				"${BUILT_PRODUCTS_DIR}/SpriteKitEasingSwift/SpriteKitEasingSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Animo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpriteKitEasingSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

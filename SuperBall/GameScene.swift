@@ -30,7 +30,10 @@ class GameScene: SKScene {
       InitStageSize(SizeX: ViewSizeX, SizeY: ViewSizeY)
       SetStageBall()
       
-      NotificationCenter.default.addObserver(self, selector: #selector(CatchNotification(notification:)), name: .notifyName, object: nil)      
+      //移動するために通知を受け取る
+      NotificationCenter.default.addObserver(self, selector: #selector(MoveCatchNotification(notification:)), name: .MoveBall, object: nil)
+      //移動後に、揃ってるかの確認したいから通知を受け取る。。
+      NotificationCenter.default.addObserver(self, selector: #selector(FinishMoveCatchNotification(notification:)), name: .FinishMove, object: nil)
     }
    
    private func InitStageSize(SizeX: CGFloat?, SizeY: CGFloat?){
@@ -180,6 +183,14 @@ class GameScene: SKScene {
       return
    }
    
+   private func SwapStageNum(FirstX: Int, FirstY: Int, SecondX: Int, SecondY: Int){
+      
+      let Tmp = self.OpenStage.Stage[FirstX][FirstY]
+      OpenStage.Stage[FirstX][FirstY] = OpenStage.Stage[SecondX][SecondY]
+      OpenStage.Stage[SecondX][SecondY] = Tmp
+      return
+   }
+   
    private func MoveDoubleBall(FirstX: Int, FirstY: Int, SecondX: Int, SecondY: Int, Vect: String){
       
       switch Vect {
@@ -205,6 +216,7 @@ class GameScene: SKScene {
       }
       
       SwapAllBall(FirstX: FirstX, FirstY: FirstY, SecondX: SecondX, SecondY: SecondY)
+      SwapStageNum(FirstX: FirstX, FirstY: FirstY, SecondX: SecondX, SecondY: SecondY)
       
       return
    }
@@ -222,9 +234,23 @@ class GameScene: SKScene {
       PrintMoveInfo(FirstX: FirstX, FirstY: FirstY, SecondX: SecondX, SecondY: SecondY)
       MoveDoubleBall(FirstX: FirstX, FirstY: FirstY, SecondX: SecondX, SecondY: SecondY, Vect: Vect)
       ShowAllBall()
+      ShowAllStageNum()
       return
    }
    
+   private func ShowAllStageNum() {
+      print("\n--- All Stage Into ---")
+      
+      for x in 1...4{
+         print("[", terminator: "")
+         for y in 1 ... 4 {
+            print(" \(self.OpenStage.Stage[x][y])", terminator: "")
+         }
+         print(" ]")
+      }
+      print("--------------------")
+      return
+   }
    
    private func ShowAllBall(){
       
@@ -241,8 +267,8 @@ class GameScene: SKScene {
       return
    }
    
-   @objc func CatchNotification(notification: Notification) -> Void {
-      print("--- Catch notification ---")
+   @objc func MoveCatchNotification(notification: Notification) -> Void {
+      print("--- Move notification ---")
 
       if let userInfo = notification.userInfo {
          let SentedX = userInfo["SentX"] as! Int
@@ -258,8 +284,111 @@ class GameScene: SKScene {
       
       return
    }
+   
+   @objc func FinishMoveCatchNotification(notification: Notification) -> Void {
+      print("--- Finish Move notification ---")
+  
+      if let userInfo = notification.userInfo {
+         let x = userInfo["x"] as! Int
+         let y = userInfo["y"] as! Int
+         CheckStage(x: x, y: y)
+      }else{
+         print("通知受け取ったけど、中身nilやった。")
+      }
+      return
+   }
+   
+   private func ShowCheck(x: Int , y: Int) {
+      print("\nstage[\(x)][\(y)]が一致しています。\n")
+   }
+   
+   
     
+   
+   private func CheckStage(x: Int, y: Int) {
     
+      let CheckTapple = self.OpenStage.CheckStage(x: x, y: y)
+      
+      guard CheckTapple.1 == true else {
+         print("一致しているものは存在していませんでした。")
+         return
+      }
+      
+      self.AllBall[x][y - 1].YouAreJustDead = true
+      
+      let Count = CheckTapple.0.count
+      
+      if Count == 2 {
+         Remove2Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1])
+         Create2Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1])
+         return
+      }
+      
+      if Count == 4 {
+         Remove3Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3])
+         Create3Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3])
+         return
+      }
+      
+      if Count == 6 {
+         Remove4Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3], x4: CheckTapple.0[4], y4: CheckTapple.0[5])
+         Create4Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3], x4: CheckTapple.0[4], y4: CheckTapple.0[5])
+         return
+      }
+      
+      print("ここに入るのはおかしい。")
+      fatalError("ここに入るのはおかしい。")
+      
+   }
+   
+   private func CreateBall(x: Int, y: Int) {
+      OpenStage.ChangeStageNum(x: x, y: y)
+      let StageNum = OpenStage.Stage[x][y]
+      let balls = ball(BallPositionX: x, BallPositionY: y , BallColor: StageNum, ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY))
+      AllBall[x][y - 1] = balls
+      addChild(balls)
+   }
+   
+   private func Create2Balls(x1: Int, y1: Int, x2: Int, y2: Int){
+      self.CreateBall(x: x1, y: y1)
+      self.CreateBall(x: x2, y: y2)
+   }
+   
+   private func Create3Balls(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int){
+      self.CreateBall(x: x1, y: y1)
+      self.CreateBall(x: x2, y: y2)
+      self.CreateBall(x: x3, y: y3)
+   }
+   
+   private func Create4Balls(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int, x4: Int, y4: Int){
+      self.CreateBall(x: x1, y: y1)
+      self.CreateBall(x: x2, y: y2)
+      self.CreateBall(x: x3, y: y3)
+      self.CreateBall(x: x4, y: y4)
+   }
+   
+   private func Remove2Balls(x1: Int, y1: Int, x2: Int, y2: Int){
+      AllBall[x1][y1 - 1].RemoveBall()
+      
+      AllBall[x2][y2 - 1].RemoveBall()
+   }
+   
+   private func Remove3Balls(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int){
+      AllBall[x1][y1 - 1].RemoveBall()
+      
+      AllBall[x2][y2 - 1].RemoveBall()
+      AllBall[x3][y3 - 1].RemoveBall()
+   }
+   
+   private func Remove4Balls(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int, x4: Int, y4: Int){
+      AllBall[x1][y1 - 1].RemoveBall()
+      
+      AllBall[x2][y2 - 1].RemoveBall()
+      AllBall[x3][y3 - 1].RemoveBall()
+      AllBall[x4][y4 - 1].RemoveBall()
+   }
+   
+   
     func touchDown(atPoint pos : CGPoint) {
 //        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
 //            n.position = pos
