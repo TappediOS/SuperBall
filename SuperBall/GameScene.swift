@@ -17,6 +17,9 @@ class GameScene: SKScene {
    private var AllBall: [[ball]] = [[]]
    
    private let OpenStage = HoldStage(Flame: 1)
+   private let Score = ScoreSet()
+   
+   private var ExistCombo = false
     
     override func didMove(to view: SKView) {
 
@@ -26,15 +29,25 @@ class GameScene: SKScene {
       
       //view.backgroundColor = UIColor.white
       //self.backgroundColor = UIColor.white
+     
       
       InitStageSize(SizeX: ViewSizeX, SizeY: ViewSizeY)
+      InitScore()
       SetStageBall()
+      
       
       //移動するために通知を受け取る
       NotificationCenter.default.addObserver(self, selector: #selector(MoveCatchNotification(notification:)), name: .MoveBall, object: nil)
       //移動後に、揃ってるかの確認したいから通知を受け取る。。
       NotificationCenter.default.addObserver(self, selector: #selector(FinishMoveCatchNotification(notification:)), name: .FinishMove, object: nil)
     }
+   
+   private func InitScore() {
+      Score.InitScoreLabel(ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY))
+      Score.InitLevel(Level: OpenStage.StageNumMAX)
+      addChild(Score.ScoreLabel)
+      addChild(Score.ComboLabel)
+   }
    
    private func InitStageSize(SizeX: CGFloat?, SizeY: CGFloat?){
       if let X = SizeX {
@@ -167,13 +180,7 @@ class GameScene: SKScene {
       }
    }
    
-   private func PrintMoveInfo(FirstX: Int, FirstY: Int, SecondX: Int, SecondY: Int){
-      
-      print("\n移動する2つの座標が決定しました。")
-      print("1つめは座標[\(FirstX)][\(FirstY)]")
-      print("2つめは座標[\(SecondX)][\(SecondY)]")
-      return
-   }
+   
    
    private func SwapAllBall(FirstX: Int, FirstY: Int, SecondX: Int, SecondY: Int){
     
@@ -238,6 +245,8 @@ class GameScene: SKScene {
       return
    }
    
+   
+   //MARK:- 情報出力
    private func ShowAllStageNum() {
       print("\n--- All Stage Into ---")
       
@@ -267,6 +276,16 @@ class GameScene: SKScene {
       return
    }
    
+   private func PrintMoveInfo(FirstX: Int, FirstY: Int, SecondX: Int, SecondY: Int){
+      
+      print("\n移動する2つの座標が決定しました。")
+      print("1つめは座標[\(FirstX)][\(FirstY)]")
+      print("2つめは座標[\(SecondX)][\(SecondY)]")
+      return
+   }
+   
+   
+   //MARK:- 通知を受け取る関数郡
    @objc func MoveCatchNotification(notification: Notification) -> Void {
       print("--- Move notification ---")
 
@@ -302,34 +321,89 @@ class GameScene: SKScene {
       print("\nstage[\(x)][\(y)]が一致しています。\n")
    }
    
+   //MARK:- スコアを上げる関数
+   private func ScoreUP(Count: Int) {
+      Score.ScoreUp(CountOfDis: Count)
+   }
+   
+   //MARK:- レベルを上げる関数
+   private func CheckLevelUP() {
+      if Score.Level == 4 && Score.YourScore > 500 {
+         Score.LevelUP()
+         OpenStage.StageNumMAX += 1
+      }
+      
+      if Score.Level == 5 && Score.YourScore > 1000 {
+         Score.LevelUP()
+         OpenStage.StageNumMAX += 1
+      }
+      
+      if Score.Level == 6 && Score.YourScore > 1500 {
+         Score.LevelUP()
+         OpenStage.StageNumMAX += 1
+      }
+      
+      if Score.Level == 7 && Score.YourScore > 2000 {
+         Score.LevelUP()
+         OpenStage.StageNumMAX += 1
+      }
+      
+      if Score.Level == 8 && Score.YourScore > 2500 {
+         Score.LevelUP()
+         OpenStage.StageNumMAX += 1
+      }
+      
+      if Score.Level == 9 && Score.YourScore > 3000 {
+         Score.LevelUP()
+         OpenStage.StageNumMAX += 1
+      }
+   }
    
     
-   
+   //MARK:- ここで、ボールが何個消えるかが決定する。
    private func CheckStage(x: Int, y: Int) {
     
       let CheckTapple = self.OpenStage.CheckStage(x: x, y: y)
       
       guard CheckTapple.1 == true else {
          print("一致しているものは存在していませんでした。")
+         
+         if ExistCombo == false {
+            Score.ResetCombo()
+         }
+         
+         ExistCombo = false
+         
          return
       }
       
+      ExistCombo = true
+      
+      //移動できなくする。
       self.AllBall[x][y - 1].YouAreJustDead = true
       
       let Count = CheckTapple.0.count
       
+      //MARK: スコアを上げる関数に飛ばす。
+      ScoreUP(Count: Count)
+      //MARK: レベルアップするかどうかを判断
+      CheckLevelUP()
+      
+      //2個消す。
       if Count == 2 {
          Remove2Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1])
          Create2Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1])
          return
       }
       
+      //3個消す。
       if Count == 4 {
          Remove3Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3])
          Create3Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3])
          return
       }
       
+      //4個消す。
       if Count == 6 {
          Remove4Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3], x4: CheckTapple.0[4], y4: CheckTapple.0[5])
          Create4Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3], x4: CheckTapple.0[4], y4: CheckTapple.0[5])
@@ -341,12 +415,16 @@ class GameScene: SKScene {
       
    }
    
+   
+   //MARK:- ボールを生成する処理
    private func CreateBall(x: Int, y: Int) {
       OpenStage.ChangeStageNum(x: x, y: y)
       let StageNum = OpenStage.Stage[x][y]
       let balls = ball(BallPositionX: x, BallPositionY: y , BallColor: StageNum, ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY))
       AllBall[x][y - 1] = balls
       addChild(balls)
+      AllBall[x][y - 1].ReCreatedAnimation()
+      return
    }
    
    private func Create2Balls(x1: Int, y1: Int, x2: Int, y2: Int){
@@ -367,6 +445,8 @@ class GameScene: SKScene {
       self.CreateBall(x: x4, y: y4)
    }
    
+   
+   //MARK:- ボールを削除する処理
    private func Remove2Balls(x1: Int, y1: Int, x2: Int, y2: Int){
       AllBall[x1][y1 - 1].RemoveBall()
       
@@ -389,6 +469,8 @@ class GameScene: SKScene {
    }
    
    
+   
+   //MARK:- タッチイベント
     func touchDown(atPoint pos : CGPoint) {
 //        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
 //            n.position = pos

@@ -12,6 +12,7 @@ import SpriteKit
 import Animo
 import AudioToolbox
 import SpriteKitEasingSwift
+import TapticEngine
 
 
 
@@ -21,7 +22,9 @@ class ball :SKSpriteNode {
    private var Movement:Int      //動く距離を表す
    public var PositionX: Int
    public var PositionY: Int
-   private let AnimateioSpeed = 0.185   //動く際のアニメーションスピード
+   private let AnimateioSpeed: Double = 0.195   //動く際のアニメーションスピード
+   private let FadeOutAnimationSpeed: Double = 0.187
+   private let FadeInAnimationSpeed: Double = 0.21
    
    public var TouchBegan: CGPoint
    private var AreYouMoved: Bool = true
@@ -89,6 +92,18 @@ class ball :SKSpriteNode {
          break
       case 7:
          texture = SKTexture(imageNamed: "Seven.png")
+         self.SelfNumber = BallColor
+         break
+      case 8:
+         texture = SKTexture(imageNamed: "Eight.png")
+         self.SelfNumber = BallColor
+         break
+      case 9:
+         texture = SKTexture(imageNamed: "Nine.png")
+         self.SelfNumber = BallColor
+         break
+      case 10:
+         texture = SKTexture(imageNamed: "Ten.png")
          self.SelfNumber = BallColor
          break
       default:
@@ -237,8 +252,8 @@ class ball :SKSpriteNode {
          print("移動中です。(StartPoint)")
          return
       }
-      AudioServicesPlaySystemSound(1519)
-      
+      Play3Dtouch()
+
       print("--- ball info ---")
       print("ball num is \(self.SelfNumber)")
       print("ball posi is [\(self.PositionX)][\(self.PositionY)]")
@@ -321,8 +336,8 @@ class ball :SKSpriteNode {
       
       self.AfterMovedPointY = MovePoint.y
       
-      AudioServicesPlaySystemSound(1519)
-      
+     Play3Dtouch()
+
       //let Aktion: SKAction = SKAction.move(to: MovePoint, duration: AnimateioSpeed)
       
       let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
@@ -345,8 +360,8 @@ class ball :SKSpriteNode {
       
       self.AfterMovedPointY = MovePoint.y
       
-      AudioServicesPlaySystemSound(1519)
-      
+      Play3Dtouch()
+
       let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
@@ -366,8 +381,8 @@ class ball :SKSpriteNode {
       
       self.AfterMovedPointX = MovePoint.x
       
-      AudioServicesPlaySystemSound(1519)
-      
+      Play3Dtouch()
+
       let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
          self?.AbleToMove()
@@ -384,7 +399,8 @@ class ball :SKSpriteNode {
       
       self.AfterMovedPointX = MovePoint.x
       
-      AudioServicesPlaySystemSound(1519)
+      Play3Dtouch()
+
       
       let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
@@ -401,17 +417,46 @@ class ball :SKSpriteNode {
       return
    }
    
-   
-   
    public func RemoveBall() {
-      let FadeOut = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeIn, time: 0.143, fromValue: 1, toValue: 0)
+      
+      let LargeAction = SKEase.scale(easeFunction: .curveTypeCubic, easeType: .easeTypeIn, time: FadeOutAnimationSpeed, from: 1, to: 1.3)
+      
+      let FadeOut = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: FadeInAnimationSpeed, fromValue: 1, toValue: 0.04)
+      let SmallAction = SKEase.scale(easeFunction: .curveTypeQuartic, easeType: .easeTypeOut, time: FadeInAnimationSpeed, from: 1.3, to: 0.2)
+      
+      let groupAktion = SKAction.group([FadeOut, SmallAction])
+      
       let Remove = SKAction.removeFromParent()
-      let FadeAction = SKAction.sequence([FadeOut, Remove])
+      let FadeAction = SKAction.sequence([LargeAction, groupAktion, Remove])
       
       self.run(FadeAction)
    }
    
    
+   public func ReCreatedAnimation() {
+      
+      self.isHidden = true
+      
+      let WaitActon = SKAction.wait(forDuration: FadeOutAnimationSpeed + FadeInAnimationSpeed + FadeOutAnimationSpeed * 0.1)
+      
+      let SmallAction = SKEase.scale(easeFunction: .curveTypeQuartic, easeType: .easeTypeOut, time: 0.02, from: 0.2, to: 0.15)
+      let FadeOutAction = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 0.02, fromValue: 0.05, toValue: 0.01)
+      
+      let LargeAction = SKEase.scale(easeFunction: .curveTypeBack, easeType: .easeTypeOut, time: FadeInAnimationSpeed, from: 0.15, to: 1)
+      let FadeInAction = SKEase.fade(easeFunction: .curveTypeBack, easeType: .easeTypeOut, time: FadeInAnimationSpeed, fromValue: 0.01, toValue: 1)
+      
+      let WaitGroup = SKAction.sequence([WaitActon, SKAction.run({ [weak self] in
+         self?.isHidden = false
+      }) ])
+      let SmallAcitonGroup = SKAction.group([SmallAction, FadeOutAction])
+      let LargeActionGroup = SKAction.group([LargeAction, FadeInAction])
+      
+      let RecreatedAktion = SKAction.sequence([WaitGroup, SmallAcitonGroup, LargeActionGroup])
+      
+
+      self.run(RecreatedAktion)
+      AudioServicesPlaySystemSound(1521)
+   }
    
    
    /// 2点間の距離を求め、距離が十分であるかどうか調べる
@@ -433,6 +478,17 @@ class ball :SKSpriteNode {
       }
       
       return true
+   }
+   
+   func is3dTouchAvailable(traitCollection: UITraitCollection) -> Bool {
+      return traitCollection.forceTouchCapability == UIForceTouchCapability.available
+   }
+   
+   //MARK:- 3dタッチならす
+   private func Play3Dtouch() {
+      TapticEngine.impact.feedback(.medium)
+      //TapticEngine.notification.feedback(.warning)
+      return
    }
    
 }

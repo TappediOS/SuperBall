@@ -27,8 +27,16 @@ class GameViewController: UIViewController {
             
             view.ignoresSiblingOrder = true
             view.accessibilityIgnoresInvertColors = true
+         
+         #if DEBUG
             view.showsFPS = true
             view.showsNodeCount = true
+         #else
+            view.showsFPS = false
+            view.showsNodeCount = false
+         #endif
+         
+         
          
             view.backgroundColor = UIColor.white
         }

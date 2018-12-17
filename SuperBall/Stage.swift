@@ -24,8 +24,10 @@ class HoldStage {
    public var ViewSizeX : CGFloat = 0
    public var ViewSizeY : CGFloat = 0
    
-   private let StageNumMAX = 7
    
+   //MARK:- ステージの色の数を決定している。
+   public var StageNumMAX = 4
+   //MARK:-
    
    init(Flame: Int) {
       self.StageFlame = Flame
@@ -64,6 +66,7 @@ class HoldStage {
          if(self.Stage[x - 1][y] != ReturnNum && self.Stage[x][y - 1] != ReturnNum){
             break
          }
+         
       }
       
       return ReturnNum
@@ -71,12 +74,17 @@ class HoldStage {
    
    private func NotMultiNumEx(x: Int, y: Int) -> Int {
       var ReturnNum: Int = 1
+      var count:Int = 0
       
       while true {
          ReturnNum = Int(arc4random_uniform(UInt32(StageNumMAX)) + 1)
          if(self.Stage[x - 1][y] != ReturnNum && self.Stage[x][y - 1] != ReturnNum
             && self.Stage[x + 1][y] != ReturnNum && self.Stage[x][y + 1] != ReturnNum){
             break
+         }
+         count += 1
+         if count > 10000 {
+            return 1
          }
       }
       
@@ -90,7 +98,6 @@ class HoldStage {
    }
    
    
-   // MARK: ボールの色を決定している。
    public func SetStageNum() {
       for x in 1 ... 4 {
          for y in 1 ... 4 {

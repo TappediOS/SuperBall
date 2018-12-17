@@ -20,6 +20,8 @@
 		BF1F226321A3AFB40021DB8F /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226221A3AFB40021DB8F /* Stage.swift */; };
 		BF1F226521A3AFCE0021DB8F /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226421A3AFCE0021DB8F /* Referee.swift */; };
 		BF1F226721A542110021DB8F /* ExNotiificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226621A542110021DB8F /* ExNotiificationName.swift */; };
+		BF2346D021B671B30072E571 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2346CF21B671B20072E571 /* Score.swift */; };
+		BFC01F0421B4B5DD00D1D2C0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		BF1F226221A3AFB40021DB8F /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		BF1F226421A3AFCE0021DB8F /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referee.swift; sourceTree = "<group>"; };
 		BF1F226621A542110021DB8F /* ExNotiificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExNotiificationName.swift; sourceTree = "<group>"; };
+		BF2346CF21B671B20072E571 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,8 +103,10 @@
 				BF1F225021A3AEF70021DB8F /* GameViewController.swift */,
 				BF1F224E21A3AEF70021DB8F /* GameScene.swift */,
 				BF1F226021A3AF9A0021DB8F /* Ball.swift */,
+				BF2346CF21B671B20072E571 /* Score.swift */,
 				BF1F226221A3AFB40021DB8F /* Stage.swift */,
 				BF1F226421A3AFCE0021DB8F /* Referee.swift */,
+				BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */,
 				BF1F225221A3AEF70021DB8F /* Main.storyboard */,
 				BF1F225521A3AEF70021DB8F /* Assets.xcassets */,
 				BF1F225721A3AEF70021DB8F /* LaunchScreen.storyboard */,
@@ -121,6 +127,7 @@
 				BF1F224221A3AEF70021DB8F /* Frameworks */,
 				BF1F224321A3AEF70021DB8F /* Resources */,
 				A2B336DFCC0ACEF24BD97E13 /* [CP] Embed Pods Frameworks */,
+				BFC01F0521B4B85000D1D2C0 /* LicensePlist */,
 			);
 			buildRules = (
 			);
@@ -173,6 +180,7 @@
 				BF1F224B21A3AEF70021DB8F /* GameScene.sks in Resources */,
 				BF1F225621A3AEF70021DB8F /* Assets.xcassets in Resources */,
 				BF1F225921A3AEF70021DB8F /* LaunchScreen.storyboard in Resources */,
+				BFC01F0421B4B5DD00D1D2C0 /* Settings.bundle in Resources */,
 				BF1F224D21A3AEF70021DB8F /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +221,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Animo/Animo.framework",
 				"${BUILT_PRODUCTS_DIR}/SpriteKitEasingSwift/SpriteKitEasingSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/TapticEngine/TapticEngine.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -220,11 +229,30 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Animo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpriteKitEasingSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TapticEngine.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BFC01F0521B4B85000D1D2C0 /* LicensePlist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = LicensePlist;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\ncd $SRCROOT\n/usr/local/bin/license-plist --output-path $SuperBall/Settings.bundle\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -235,6 +263,7 @@
 			files = (
 				BF1F226121A3AF9A0021DB8F /* Ball.swift in Sources */,
 				BF1F224F21A3AEF70021DB8F /* GameScene.swift in Sources */,
+				BF2346D021B671B30072E571 /* Score.swift in Sources */,
 				BF1F226521A3AFCE0021DB8F /* Referee.swift in Sources */,
 				BF1F225121A3AEF70021DB8F /* GameViewController.swift in Sources */,
 				BF1F224921A3AEF70021DB8F /* AppDelegate.swift in Sources */,
