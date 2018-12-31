@@ -13,6 +13,8 @@ import SpriteKitEasingSwift
 class ScoreSet {
    
    public var Level:Int = 0
+   private let LevelMax = 10
+   public let ScoreForLevelUP = 250
    private let Base: Int = 10
    var YourScore: Int = 0
    var Combo: Int = 0
@@ -50,12 +52,12 @@ class ScoreSet {
    private func getScore(CountOfDis: Int) ->Int {
       
       switch CountOfDis {
-      case 2:
+      case 2:  //2個消えた
          return self.Base + Combo / 10
-      case 4:
-         return self.Base * 2 + Combo / 10
-      case 6:
-         return self.Base * 3 + Combo / 10
+      case 4:  //3個消えた
+         return self.Base * 2 + Combo / 5
+      case 6:  //4個消えた
+         return self.Base * 3 + Combo / 2
       default:
          print("なんでやねん")
          return self.Base + Combo / 10
@@ -77,6 +79,11 @@ class ScoreSet {
    }
    
    public func LevelUP() {
+      
+      guard self.LevelMax > self.Level else {
+         return
+      }
+      
       self.Level += 1
       print("レベルアップしました。")
       print("Level = \(self.Level)")

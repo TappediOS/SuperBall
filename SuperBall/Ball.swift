@@ -23,8 +23,8 @@ class ball :SKSpriteNode {
    public var PositionX: Int
    public var PositionY: Int
    private let AnimateioSpeed: Double = 0.195   //動く際のアニメーションスピード
-   private let FadeOutAnimationSpeed: Double = 0.187
-   private let FadeInAnimationSpeed: Double = 0.21
+   private let FadeOutAnimationSpeed: Double = 0.176
+   private let FadeInAnimationSpeed: Double = 0.202
    
    public var TouchBegan: CGPoint
    private var AreYouMoved: Bool = true
@@ -292,7 +292,7 @@ class ball :SKSpriteNode {
          SmallAnimateion()
          if LengthOfTwoPoint(Start: TouchBegan, End: TouchEndPoint) == false {
             print("移動はしません")
-            self.AbleToMove()
+            self.AbleToMove(OnlyOnePoint: true)
             return
          }
          SwipCheck(x: TmpPoint.x, y: TmpPoint.y)
@@ -344,7 +344,7 @@ class ball :SKSpriteNode {
       
       
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
-         self?.AbleToMove()
+         self?.AbleToMove(OnlyOnePoint: false)
       }) ])
       self.run(action)
       
@@ -364,7 +364,7 @@ class ball :SKSpriteNode {
 
       let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
-         self?.AbleToMove()
+         self?.AbleToMove(OnlyOnePoint: false)
       }) ])
       self.run(action)
       
@@ -385,7 +385,7 @@ class ball :SKSpriteNode {
 
       let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
-         self?.AbleToMove()
+         self?.AbleToMove(OnlyOnePoint: false)
       }) ])
       self.run(action)
       AfterMoveInfo(First: First)
@@ -404,16 +404,18 @@ class ball :SKSpriteNode {
       
       let Aktion = SKEase.move(easeFunction: .curveTypeQuadratic, easeType: .easeTypeOut, time: self.AnimateioSpeed, from: self.position, to: MovePoint)
       let action = SKAction.sequence([Aktion, SKAction.run({ [weak self] in
-         self?.AbleToMove()
+         self?.AbleToMove(OnlyOnePoint: false)
       }) ])
       self.run(action)
       AfterMoveInfo(First: First)
    }
    
-   public func AbleToMove(){
+   public func AbleToMove(OnlyOnePoint: Bool){
       print("動けるようになりました。")
       self.AreYouMoved = true
-      self.FinishMovePostMotification()
+      if OnlyOnePoint == false {
+         self.FinishMovePostMotification()
+      }
       return
    }
    

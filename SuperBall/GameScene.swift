@@ -19,7 +19,10 @@ class GameScene: SKScene {
    private let OpenStage = HoldStage(Flame: 1)
    private let Score = ScoreSet()
    
-   private var ExistCombo = false
+   private var ExistCombo = 0 //2になったら消える。
+   private var CountForExistConbo = 0
+   
+   private let Time = GameTimer()
     
     override func didMove(to view: SKView) {
 
@@ -34,6 +37,7 @@ class GameScene: SKScene {
       InitStageSize(SizeX: ViewSizeX, SizeY: ViewSizeY)
       InitScore()
       SetStageBall()
+      InitGameTimer()
       
       
       //移動するために通知を受け取る
@@ -41,6 +45,14 @@ class GameScene: SKScene {
       //移動後に、揃ってるかの確認したいから通知を受け取る。。
       NotificationCenter.default.addObserver(self, selector: #selector(FinishMoveCatchNotification(notification:)), name: .FinishMove, object: nil)
     }
+   
+   
+   //MARK:- スコア、ステージ、Ballの初期化をする。
+   private func InitGameTimer() {
+      Time.InitTimer(ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY))
+      Time.StartTimer()
+      addChild(Time.TimerLabel)
+   }
    
    private func InitScore() {
       Score.InitScoreLabel(ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY))
@@ -113,6 +125,7 @@ class GameScene: SKScene {
       ShowAllBall()
    }
    
+   //MARK:- 端っこのやつが画面外に出ないよう判断する関数
    private func AbleToMoveBall(FirstX: Int, FirstY: Int, Vect: String) -> Bool{
       
       switch Vect {
@@ -148,6 +161,7 @@ class GameScene: SKScene {
       return true
    }
    
+   //MARK:- 2つ目のBallのあ座標を取得する。
    private func GetSecondX(FirstX: Int, FirstY: Int, Vect: String) -> Int{
       switch Vect {
       case "Up":
@@ -181,7 +195,7 @@ class GameScene: SKScene {
    }
    
    
-   
+   //MARK:- 座標変換
    private func SwapAllBall(FirstX: Int, FirstY: Int, SecondX: Int, SecondY: Int){
     
       let Tmp = AllBall[FirstX][FirstY - 1]
@@ -198,6 +212,7 @@ class GameScene: SKScene {
       return
    }
    
+   //MARK:- ballを動かす
    private func MoveDoubleBall(FirstX: Int, FirstY: Int, SecondX: Int, SecondY: Int, Vect: String){
       
       switch Vect {
@@ -231,7 +246,7 @@ class GameScene: SKScene {
    private func CheckMoveDoubleBall(FirstX: Int, FirstY: Int, Vect: String){
       
       if AbleToMoveBall(FirstX: FirstX, FirstY: FirstY, Vect: Vect) == false {
-         AllBall[FirstX][FirstY - 1].AbleToMove()
+         AllBall[FirstX][FirstY - 1].AbleToMove(OnlyOnePoint: false)
          return
       }
       
@@ -328,32 +343,32 @@ class GameScene: SKScene {
    
    //MARK:- レベルを上げる関数
    private func CheckLevelUP() {
-      if Score.Level == 4 && Score.YourScore > 500 {
+      if Score.Level == 4 && Score.YourScore > Score.ScoreForLevelUP * (Score.Level - 3) {
          Score.LevelUP()
          OpenStage.StageNumMAX += 1
       }
       
-      if Score.Level == 5 && Score.YourScore > 1000 {
+      if Score.Level == 5 && Score.YourScore > Score.ScoreForLevelUP * (Score.Level - 3) {
          Score.LevelUP()
          OpenStage.StageNumMAX += 1
       }
       
-      if Score.Level == 6 && Score.YourScore > 1500 {
+      if Score.Level == 6 && Score.YourScore > Score.ScoreForLevelUP * (Score.Level - 3) {
          Score.LevelUP()
          OpenStage.StageNumMAX += 1
       }
       
-      if Score.Level == 7 && Score.YourScore > 2000 {
+      if Score.Level == 7 && Score.YourScore > Score.ScoreForLevelUP * (Score.Level - 3) {
          Score.LevelUP()
          OpenStage.StageNumMAX += 1
       }
       
-      if Score.Level == 8 && Score.YourScore > 2500 {
+      if Score.Level == 8 && Score.YourScore > Score.ScoreForLevelUP * (Score.Level - 3) {
          Score.LevelUP()
          OpenStage.StageNumMAX += 1
       }
       
-      if Score.Level == 9 && Score.YourScore > 3000 {
+      if Score.Level == 9 && Score.YourScore > Score.ScoreForLevelUP * (Score.Level - 3) {
          Score.LevelUP()
          OpenStage.StageNumMAX += 1
       }
@@ -365,19 +380,25 @@ class GameScene: SKScene {
     
       let CheckTapple = self.OpenStage.CheckStage(x: x, y: y)
       
+      CountForExistConbo += 1
+      if CountForExistConbo == 3 {
+         CountForExistConbo = 1
+         ExistCombo = 0
+      }
+      
       guard CheckTapple.1 == true else {
          print("一致しているものは存在していませんでした。")
          
-         if ExistCombo == false {
+         ExistCombo += 1
+         
+         if ExistCombo == 2 {
             Score.ResetCombo()
          }
-         
-         ExistCombo = false
          
          return
       }
       
-      ExistCombo = true
+      
       
       //移動できなくする。
       self.AllBall[x][y - 1].YouAreJustDead = true

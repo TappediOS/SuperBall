@@ -21,6 +21,7 @@
 		BF1F226521A3AFCE0021DB8F /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226421A3AFCE0021DB8F /* Referee.swift */; };
 		BF1F226721A542110021DB8F /* ExNotiificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226621A542110021DB8F /* ExNotiificationName.swift */; };
 		BF2346D021B671B30072E571 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2346CF21B671B20072E571 /* Score.swift */; };
+		BF2DEE3521D5EE35000F140D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3421D5EE35000F140D /* Timer.swift */; };
 		BFC01F0421B4B5DD00D1D2C0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		BF1F226421A3AFCE0021DB8F /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referee.swift; sourceTree = "<group>"; };
 		BF1F226621A542110021DB8F /* ExNotiificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExNotiificationName.swift; sourceTree = "<group>"; };
 		BF2346CF21B671B20072E571 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		BF2DEE3421D5EE35000F140D /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +106,7 @@
 				BF1F224E21A3AEF70021DB8F /* GameScene.swift */,
 				BF1F226021A3AF9A0021DB8F /* Ball.swift */,
 				BF2346CF21B671B20072E571 /* Score.swift */,
+				BF2DEE3421D5EE35000F140D /* Timer.swift */,
 				BF1F226221A3AFB40021DB8F /* Stage.swift */,
 				BF1F226421A3AFCE0021DB8F /* Referee.swift */,
 				BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */,
@@ -267,6 +270,7 @@
 				BF1F226521A3AFCE0021DB8F /* Referee.swift in Sources */,
 				BF1F225121A3AEF70021DB8F /* GameViewController.swift in Sources */,
 				BF1F224921A3AEF70021DB8F /* AppDelegate.swift in Sources */,
+				BF2DEE3521D5EE35000F140D /* Timer.swift in Sources */,
 				BF1F226321A3AFB40021DB8F /* Stage.swift in Sources */,
 				BF1F226721A542110021DB8F /* ExNotiificationName.swift in Sources */,
 			);
