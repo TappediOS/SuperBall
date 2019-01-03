@@ -22,9 +22,9 @@ class ball :SKSpriteNode {
    private var Movement:Int      //動く距離を表す
    public var PositionX: Int
    public var PositionY: Int
-   private let AnimateioSpeed: Double = 0.195   //動く際のアニメーションスピード
-   private let FadeOutAnimationSpeed: Double = 0.176
-   private let FadeInAnimationSpeed: Double = 0.202
+   private let AnimateioSpeed: Double = 0.188   //動く際のアニメーションスピード
+   private let FadeOutAnimationSpeed: Double = 0.17
+   private let FadeInAnimationSpeed: Double = 0.196
    
    public var TouchBegan: CGPoint
    private var AreYouMoved: Bool = true
@@ -119,6 +119,7 @@ class ball :SKSpriteNode {
 
       //ポジションの設定。
       self.position = CGPoint(x: x1, y: y1)
+      
 
    }
    

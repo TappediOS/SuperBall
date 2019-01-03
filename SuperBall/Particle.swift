@@ -12,8 +12,8 @@ import SpriteKit
 class Particles {
    
    var Particle: SKEmitterNode!
-   private let ParticleTime = 0.4
-   private let WaitTime = 0.4
+   private let ParticleTime = 0.2
+   private let WaitTime = 0.25
    
    init(x: Int, y: Int, ViewX: Int, ViewY: Int, Color: Int) {
       
@@ -64,6 +64,7 @@ class Particles {
       }
       
       Particle.position = CGPoint(x: x1, y: y1)
+      
       
       
    }

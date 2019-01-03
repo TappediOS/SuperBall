@@ -453,7 +453,7 @@ class GameScene: SKScene {
       AllBall[x][y - 1] = balls
       addChild(balls)
       AllBall[x][y - 1].ReCreatedAnimation()
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.34) {
          self.RemoveParticle(x1: x, y1: y, Color: self.AllBall[x][y - 1].SelfNumber)
       }
       return
