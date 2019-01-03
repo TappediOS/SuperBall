@@ -435,6 +435,8 @@ class ball :SKSpriteNode {
    }
    
    
+   
+   
    public func ReCreatedAnimation() {
       
       self.isHidden = true

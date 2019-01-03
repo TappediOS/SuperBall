@@ -22,6 +22,17 @@
 		BF1F226721A542110021DB8F /* ExNotiificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226621A542110021DB8F /* ExNotiificationName.swift */; };
 		BF2346D021B671B30072E571 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2346CF21B671B20072E571 /* Score.swift */; };
 		BF2DEE3521D5EE35000F140D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3421D5EE35000F140D /* Timer.swift */; };
+		BF2DEE3921DA1243000F140D /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3821DA1243000F140D /* Particle.swift */; };
+		BFAA117E21DB55F9004BEFC7 /* RemoveParticle9.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */; };
+		BFAA117F21DB55F9004BEFC7 /* RemoveParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */; };
+		BFAA118021DB55F9004BEFC7 /* RemoveParticle7.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117621DB55F8004BEFC7 /* RemoveParticle7.sks */; };
+		BFAA118121DB55F9004BEFC7 /* RemoveParticle10.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117721DB55F8004BEFC7 /* RemoveParticle10.sks */; };
+		BFAA118221DB55F9004BEFC7 /* RemoveParticle6.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117821DB55F8004BEFC7 /* RemoveParticle6.sks */; };
+		BFAA118321DB55F9004BEFC7 /* RemoveParticle3.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */; };
+		BFAA118421DB55F9004BEFC7 /* RemoveParticle4.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117A21DB55F9004BEFC7 /* RemoveParticle4.sks */; };
+		BFAA118521DB55F9004BEFC7 /* RemoveParticle1.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117B21DB55F9004BEFC7 /* RemoveParticle1.sks */; };
+		BFAA118621DB55F9004BEFC7 /* RemoveParticle5.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */; };
+		BFAA118721DB55F9004BEFC7 /* RemoveParticle8.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */; };
 		BFC01F0421B4B5DD00D1D2C0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +55,17 @@
 		BF1F226621A542110021DB8F /* ExNotiificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExNotiificationName.swift; sourceTree = "<group>"; };
 		BF2346CF21B671B20072E571 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		BF2DEE3421D5EE35000F140D /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		BF2DEE3821DA1243000F140D /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
+		BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle9.sks; sourceTree = "<group>"; };
+		BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle2.sks; sourceTree = "<group>"; };
+		BFAA117621DB55F8004BEFC7 /* RemoveParticle7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle7.sks; sourceTree = "<group>"; };
+		BFAA117721DB55F8004BEFC7 /* RemoveParticle10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle10.sks; sourceTree = "<group>"; };
+		BFAA117821DB55F8004BEFC7 /* RemoveParticle6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle6.sks; sourceTree = "<group>"; };
+		BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle3.sks; sourceTree = "<group>"; };
+		BFAA117A21DB55F9004BEFC7 /* RemoveParticle4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle4.sks; sourceTree = "<group>"; };
+		BFAA117B21DB55F9004BEFC7 /* RemoveParticle1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle1.sks; sourceTree = "<group>"; };
+		BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle5.sks; sourceTree = "<group>"; };
+		BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle8.sks; sourceTree = "<group>"; };
 		BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +122,16 @@
 			children = (
 				BF1F224821A3AEF70021DB8F /* AppDelegate.swift */,
 				BF1F224A21A3AEF70021DB8F /* GameScene.sks */,
+				BFAA117B21DB55F9004BEFC7 /* RemoveParticle1.sks */,
+				BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */,
+				BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */,
+				BFAA117A21DB55F9004BEFC7 /* RemoveParticle4.sks */,
+				BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */,
+				BFAA117821DB55F8004BEFC7 /* RemoveParticle6.sks */,
+				BFAA117621DB55F8004BEFC7 /* RemoveParticle7.sks */,
+				BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */,
+				BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */,
+				BFAA117721DB55F8004BEFC7 /* RemoveParticle10.sks */,
 				BF1F224C21A3AEF70021DB8F /* Actions.sks */,
 				BF1F226621A542110021DB8F /* ExNotiificationName.swift */,
 				BF1F225021A3AEF70021DB8F /* GameViewController.swift */,
@@ -107,6 +139,7 @@
 				BF1F226021A3AF9A0021DB8F /* Ball.swift */,
 				BF2346CF21B671B20072E571 /* Score.swift */,
 				BF2DEE3421D5EE35000F140D /* Timer.swift */,
+				BF2DEE3821DA1243000F140D /* Particle.swift */,
 				BF1F226221A3AFB40021DB8F /* Stage.swift */,
 				BF1F226421A3AFCE0021DB8F /* Referee.swift */,
 				BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */,
@@ -179,11 +212,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFAA118721DB55F9004BEFC7 /* RemoveParticle8.sks in Resources */,
 				BF1F225421A3AEF70021DB8F /* Main.storyboard in Resources */,
+				BFAA118021DB55F9004BEFC7 /* RemoveParticle7.sks in Resources */,
 				BF1F224B21A3AEF70021DB8F /* GameScene.sks in Resources */,
+				BFAA118321DB55F9004BEFC7 /* RemoveParticle3.sks in Resources */,
 				BF1F225621A3AEF70021DB8F /* Assets.xcassets in Resources */,
+				BFAA117F21DB55F9004BEFC7 /* RemoveParticle2.sks in Resources */,
+				BFAA118521DB55F9004BEFC7 /* RemoveParticle1.sks in Resources */,
+				BFAA118121DB55F9004BEFC7 /* RemoveParticle10.sks in Resources */,
+				BFAA118621DB55F9004BEFC7 /* RemoveParticle5.sks in Resources */,
 				BF1F225921A3AEF70021DB8F /* LaunchScreen.storyboard in Resources */,
+				BFAA117E21DB55F9004BEFC7 /* RemoveParticle9.sks in Resources */,
 				BFC01F0421B4B5DD00D1D2C0 /* Settings.bundle in Resources */,
+				BFAA118221DB55F9004BEFC7 /* RemoveParticle6.sks in Resources */,
+				BFAA118421DB55F9004BEFC7 /* RemoveParticle4.sks in Resources */,
 				BF1F224D21A3AEF70021DB8F /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF1F226121A3AF9A0021DB8F /* Ball.swift in Sources */,
+				BF2DEE3921DA1243000F140D /* Particle.swift in Sources */,
 				BF1F224F21A3AEF70021DB8F /* GameScene.swift in Sources */,
 				BF2346D021B671B30072E571 /* Score.swift in Sources */,
 				BF1F226521A3AFCE0021DB8F /* Referee.swift in Sources */,

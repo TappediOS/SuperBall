@@ -161,7 +161,7 @@ class GameScene: SKScene {
       return true
    }
    
-   //MARK:- 2つ目のBallのあ座標を取得する。
+   //MARK:- 2つ目のBallの座標を取得する。
    private func GetSecondX(FirstX: Int, FirstY: Int, Vect: String) -> Int{
       switch Vect {
       case "Up":
@@ -414,6 +414,7 @@ class GameScene: SKScene {
       if Count == 2 {
          Remove2Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1])
          Create2Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1])
+         
          return
       }
       
@@ -428,6 +429,7 @@ class GameScene: SKScene {
       if Count == 6 {
          Remove4Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3], x4: CheckTapple.0[4], y4: CheckTapple.0[5])
          Create4Balls(x1: x, y1: y, x2: CheckTapple.0[0], y2: CheckTapple.0[1], x3: CheckTapple.0[2], y3: CheckTapple.0[3], x4: CheckTapple.0[4], y4: CheckTapple.0[5])
+         
          return
       }
       
@@ -436,7 +438,13 @@ class GameScene: SKScene {
       
    }
    
-   
+   func RemoveParticle(x1: Int, y1: Int, Color: Int){
+      
+      let Part = Particles(x: x1, y: y1, ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY), Color: Color)
+      addChild(Part.RetrutnParticle())
+      Part.RemoveFromParent()
+      
+   }
    //MARK:- ボールを生成する処理
    private func CreateBall(x: Int, y: Int) {
       OpenStage.ChangeStageNum(x: x, y: y)
@@ -445,6 +453,9 @@ class GameScene: SKScene {
       AllBall[x][y - 1] = balls
       addChild(balls)
       AllBall[x][y - 1].ReCreatedAnimation()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+         self.RemoveParticle(x1: x, y1: y, Color: self.AllBall[x][y - 1].SelfNumber)
+      }
       return
    }
    
