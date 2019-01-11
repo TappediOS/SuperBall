@@ -12,8 +12,8 @@ import SpriteKit
 class Particles {
    
    var Particle: SKEmitterNode!
-   private let ParticleTime = 0.2
-   private let WaitTime = 0.25
+   private let ParticleTime = 0.35
+   private let WaitTime = 0.3
    
    init(x: Int, y: Int, ViewX: Int, ViewY: Int, Color: Int) {
       
