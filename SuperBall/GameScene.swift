@@ -30,8 +30,7 @@ class GameScene: SKScene {
       let ViewSizeX = self.scene?.frame.width
       let ViewSizeY = self.scene?.frame.height
       
-      //view.backgroundColor = UIColor.white
-      //self.backgroundColor = UIColor.white
+      self.backgroundColor = UIColor.init(displayP3Red: 51 / 255, green: 51 / 255, blue: 51 / 255, alpha: 0)
      
       
       InitStageSize(SizeX: ViewSizeX, SizeY: ViewSizeY)

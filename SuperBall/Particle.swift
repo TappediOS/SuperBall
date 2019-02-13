@@ -28,7 +28,7 @@ class Particles {
       //ここで画像を選択。
       switch Color {
       case 1:
-         Particle = SKEmitterNode.init(fileNamed: "RemoveParticle1.sks")
+         Particle = SKEmitterNode.init(fileNamed: "RemoveParticle.sks")
          break
       case 2:
          Particle = SKEmitterNode.init(fileNamed: "RemoveParticle2.sks")

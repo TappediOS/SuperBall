@@ -30,7 +30,7 @@
 		BFAA118221DB55F9004BEFC7 /* RemoveParticle6.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117821DB55F8004BEFC7 /* RemoveParticle6.sks */; };
 		BFAA118321DB55F9004BEFC7 /* RemoveParticle3.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */; };
 		BFAA118421DB55F9004BEFC7 /* RemoveParticle4.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117A21DB55F9004BEFC7 /* RemoveParticle4.sks */; };
-		BFAA118521DB55F9004BEFC7 /* RemoveParticle1.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117B21DB55F9004BEFC7 /* RemoveParticle1.sks */; };
+		BFAA118521DB55F9004BEFC7 /* RemoveParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */; };
 		BFAA118621DB55F9004BEFC7 /* RemoveParticle5.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */; };
 		BFAA118721DB55F9004BEFC7 /* RemoveParticle8.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */; };
 		BFC01F0421B4B5DD00D1D2C0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */; };
@@ -63,7 +63,7 @@
 		BFAA117821DB55F8004BEFC7 /* RemoveParticle6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle6.sks; sourceTree = "<group>"; };
 		BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle3.sks; sourceTree = "<group>"; };
 		BFAA117A21DB55F9004BEFC7 /* RemoveParticle4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle4.sks; sourceTree = "<group>"; };
-		BFAA117B21DB55F9004BEFC7 /* RemoveParticle1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle1.sks; sourceTree = "<group>"; };
+		BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle.sks; sourceTree = "<group>"; };
 		BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle5.sks; sourceTree = "<group>"; };
 		BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle8.sks; sourceTree = "<group>"; };
 		BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 			children = (
 				BF1F224821A3AEF70021DB8F /* AppDelegate.swift */,
 				BF1F224A21A3AEF70021DB8F /* GameScene.sks */,
-				BFAA117B21DB55F9004BEFC7 /* RemoveParticle1.sks */,
+				BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */,
 				BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */,
 				BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */,
 				BFAA117A21DB55F9004BEFC7 /* RemoveParticle4.sks */,
@@ -219,7 +219,7 @@
 				BFAA118321DB55F9004BEFC7 /* RemoveParticle3.sks in Resources */,
 				BF1F225621A3AEF70021DB8F /* Assets.xcassets in Resources */,
 				BFAA117F21DB55F9004BEFC7 /* RemoveParticle2.sks in Resources */,
-				BFAA118521DB55F9004BEFC7 /* RemoveParticle1.sks in Resources */,
+				BFAA118521DB55F9004BEFC7 /* RemoveParticle.sks in Resources */,
 				BFAA118121DB55F9004BEFC7 /* RemoveParticle10.sks in Resources */,
 				BFAA118621DB55F9004BEFC7 /* RemoveParticle5.sks in Resources */,
 				BF1F225921A3AEF70021DB8F /* LaunchScreen.storyboard in Resources */,
