@@ -21,6 +21,7 @@
 		BF1F226521A3AFCE0021DB8F /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226421A3AFCE0021DB8F /* Referee.swift */; };
 		BF1F226721A542110021DB8F /* ExNotiificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226621A542110021DB8F /* ExNotiificationName.swift */; };
 		BF2346D021B671B30072E571 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2346CF21B671B20072E571 /* Score.swift */; };
+		BF2DBB87221FCB1D00D53DF3 /* Sound in Resources */ = {isa = PBXBuildFile; fileRef = BF2DBB86221FCB1D00D53DF3 /* Sound */; };
 		BF2DEE3521D5EE35000F140D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3421D5EE35000F140D /* Timer.swift */; };
 		BF2DEE3921DA1243000F140D /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3821DA1243000F140D /* Particle.swift */; };
 		BFAA117E21DB55F9004BEFC7 /* RemoveParticle9.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */; };
@@ -33,7 +34,7 @@
 		BFAA118521DB55F9004BEFC7 /* RemoveParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */; };
 		BFAA118621DB55F9004BEFC7 /* RemoveParticle5.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */; };
 		BFAA118721DB55F9004BEFC7 /* RemoveParticle8.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */; };
-		BFC01F0421B4B5DD00D1D2C0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */; };
+		BFFEA435221E815600A11712 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFFEA434221E815600A11712 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,8 @@
 		BF1F226421A3AFCE0021DB8F /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referee.swift; sourceTree = "<group>"; };
 		BF1F226621A542110021DB8F /* ExNotiificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExNotiificationName.swift; sourceTree = "<group>"; };
 		BF2346CF21B671B20072E571 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		BF2DBB86221FCB1D00D53DF3 /* Sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sound; sourceTree = "<group>"; };
+		BF2DBB88221FD0CB00D53DF3 /* Do_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Do_Mokkin.mp3; sourceTree = "<group>"; };
 		BF2DEE3421D5EE35000F140D /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		BF2DEE3821DA1243000F140D /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle9.sks; sourceTree = "<group>"; };
@@ -66,7 +69,7 @@
 		BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle.sks; sourceTree = "<group>"; };
 		BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle5.sks; sourceTree = "<group>"; };
 		BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle8.sks; sourceTree = "<group>"; };
-		BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		BFFEA434221E815600A11712 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../../../Downloads/Settings.bundle; sourceTree = "<group>"; };
 		CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +125,7 @@
 			children = (
 				BF1F224821A3AEF70021DB8F /* AppDelegate.swift */,
 				BF1F224A21A3AEF70021DB8F /* GameScene.sks */,
+				BF2DBB88221FD0CB00D53DF3 /* Do_Mokkin.mp3 */,
 				BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */,
 				BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */,
 				BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */,
@@ -142,8 +146,9 @@
 				BF2DEE3821DA1243000F140D /* Particle.swift */,
 				BF1F226221A3AFB40021DB8F /* Stage.swift */,
 				BF1F226421A3AFCE0021DB8F /* Referee.swift */,
-				BFC01F0321B4B5DD00D1D2C0 /* Settings.bundle */,
+				BFFEA434221E815600A11712 /* Settings.bundle */,
 				BF1F225221A3AEF70021DB8F /* Main.storyboard */,
+				BF2DBB86221FCB1D00D53DF3 /* Sound */,
 				BF1F225521A3AEF70021DB8F /* Assets.xcassets */,
 				BF1F225721A3AEF70021DB8F /* LaunchScreen.storyboard */,
 				BF1F225A21A3AEF70021DB8F /* Info.plist */,
@@ -220,11 +225,12 @@
 				BF1F225621A3AEF70021DB8F /* Assets.xcassets in Resources */,
 				BFAA117F21DB55F9004BEFC7 /* RemoveParticle2.sks in Resources */,
 				BFAA118521DB55F9004BEFC7 /* RemoveParticle.sks in Resources */,
+				BF2DBB87221FCB1D00D53DF3 /* Sound in Resources */,
+				BFFEA435221E815600A11712 /* Settings.bundle in Resources */,
 				BFAA118121DB55F9004BEFC7 /* RemoveParticle10.sks in Resources */,
 				BFAA118621DB55F9004BEFC7 /* RemoveParticle5.sks in Resources */,
 				BF1F225921A3AEF70021DB8F /* LaunchScreen.storyboard in Resources */,
 				BFAA117E21DB55F9004BEFC7 /* RemoveParticle9.sks in Resources */,
-				BFC01F0421B4B5DD00D1D2C0 /* Settings.bundle in Resources */,
 				BFAA118221DB55F9004BEFC7 /* RemoveParticle6.sks in Resources */,
 				BFAA118421DB55F9004BEFC7 /* RemoveParticle4.sks in Resources */,
 				BF1F224D21A3AEF70021DB8F /* Actions.sks in Resources */,
@@ -264,7 +270,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Animo/Animo.framework",
 				"${BUILT_PRODUCTS_DIR}/SpriteKitEasingSwift/SpriteKitEasingSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/TapticEngine/TapticEngine.framework",
@@ -279,7 +285,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BFC01F0521B4B85000D1D2C0 /* LicensePlist */ = {
@@ -298,7 +304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\ncd $SRCROOT\n/usr/local/bin/license-plist --output-path $SuperBall/Settings.bundle\nfi\n";
+			shellScript = "if [ $CONFIGURATION = \"Debug\" ]; then\ncd $SRCROOT\n/usr/local/bin/license-plist --output-path $SuperBall/Settings.bundle\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

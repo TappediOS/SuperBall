@@ -13,8 +13,7 @@ import Animo
 import AudioToolbox
 import SpriteKitEasingSwift
 import TapticEngine
-
-
+import AVFoundation
 
 class ball :SKSpriteNode {
    
@@ -420,7 +419,38 @@ class ball :SKSpriteNode {
       return
    }
    
+   private func SoundPlay(){
+      
+//      switch self.SelfNumber {
+//      case 1:
+//         <#code#>
+//      case 2:
+//
+//      case 3:
+//
+//      case 4:
+//
+//      case 5:
+//
+//      case 6:
+//
+//      case 7:
+//
+//      case 8:
+//
+//      case 9:
+//
+//      case 10:
+//
+//
+//      default:
+//         <#code#>
+//      }
+   }
+   
    public func RemoveBall() {
+      
+      SoundPlay()
       
       let LargeAction = SKEase.scale(easeFunction: .curveTypeCubic, easeType: .easeTypeIn, time: FadeOutAnimationSpeed, from: 1, to: 1.3)
       

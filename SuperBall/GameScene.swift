@@ -58,6 +58,8 @@ class GameScene: SKScene {
       Score.InitLevel(Level: OpenStage.StageNumMAX)
       addChild(Score.ScoreLabel)
       addChild(Score.ComboLabel)
+      addChild(Score.ComboUpLabel)
+      addChild(Score.LebelUpLabel)
    }
    
    private func InitStageSize(SizeX: CGFloat?, SizeY: CGFloat?){
@@ -335,9 +337,17 @@ class GameScene: SKScene {
       print("\nstage[\(x)][\(y)]が一致しています。\n")
    }
    
+   private func GameSet() {
+      print("gameSet")
+   }
+   
    //MARK:- スコアを上げる関数
    private func ScoreUP(Count: Int) {
-      Score.ScoreUp(CountOfDis: Count)
+      if Score.ScoreUp(CountOfDis: Count) == false {
+         return
+      }
+      
+      GameSet()
    }
    
    //MARK:- レベルを上げる関数
