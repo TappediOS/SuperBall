@@ -24,6 +24,8 @@
 		BF2DBB87221FCB1D00D53DF3 /* Sound in Resources */ = {isa = PBXBuildFile; fileRef = BF2DBB86221FCB1D00D53DF3 /* Sound */; };
 		BF2DEE3521D5EE35000F140D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3421D5EE35000F140D /* Timer.swift */; };
 		BF2DEE3921DA1243000F140D /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3821DA1243000F140D /* Particle.swift */; };
+		BF97FBE1221FE087001A52B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF97FBE0221FE087001A52B9 /* HomeView.swift */; };
+		BF97FBE32220FD12001A52B9 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF97FBE22220FD12001A52B9 /* PlaySound.swift */; };
 		BFAA117E21DB55F9004BEFC7 /* RemoveParticle9.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */; };
 		BFAA117F21DB55F9004BEFC7 /* RemoveParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */; };
 		BFAA118021DB55F9004BEFC7 /* RemoveParticle7.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117621DB55F8004BEFC7 /* RemoveParticle7.sks */; };
@@ -56,9 +58,11 @@
 		BF1F226621A542110021DB8F /* ExNotiificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExNotiificationName.swift; sourceTree = "<group>"; };
 		BF2346CF21B671B20072E571 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		BF2DBB86221FCB1D00D53DF3 /* Sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sound; sourceTree = "<group>"; };
-		BF2DBB88221FD0CB00D53DF3 /* Do_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Do_Mokkin.mp3; sourceTree = "<group>"; };
 		BF2DEE3421D5EE35000F140D /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		BF2DEE3821DA1243000F140D /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
+		BF97FBE0221FE087001A52B9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		BF97FBE22220FD12001A52B9 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		BF97FBE4222103E4001A52B9 /* Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Mokkin.mp3; sourceTree = "<group>"; };
 		BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle9.sks; sourceTree = "<group>"; };
 		BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle2.sks; sourceTree = "<group>"; };
 		BFAA117621DB55F8004BEFC7 /* RemoveParticle7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle7.sks; sourceTree = "<group>"; };
@@ -125,7 +129,6 @@
 			children = (
 				BF1F224821A3AEF70021DB8F /* AppDelegate.swift */,
 				BF1F224A21A3AEF70021DB8F /* GameScene.sks */,
-				BF2DBB88221FD0CB00D53DF3 /* Do_Mokkin.mp3 */,
 				BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */,
 				BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */,
 				BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */,
@@ -140,12 +143,15 @@
 				BF1F226621A542110021DB8F /* ExNotiificationName.swift */,
 				BF1F225021A3AEF70021DB8F /* GameViewController.swift */,
 				BF1F224E21A3AEF70021DB8F /* GameScene.swift */,
+				BF97FBE22220FD12001A52B9 /* PlaySound.swift */,
 				BF1F226021A3AF9A0021DB8F /* Ball.swift */,
+				BF97FBE0221FE087001A52B9 /* HomeView.swift */,
 				BF2346CF21B671B20072E571 /* Score.swift */,
 				BF2DEE3421D5EE35000F140D /* Timer.swift */,
 				BF2DEE3821DA1243000F140D /* Particle.swift */,
 				BF1F226221A3AFB40021DB8F /* Stage.swift */,
 				BF1F226421A3AFCE0021DB8F /* Referee.swift */,
+				BF97FBE4222103E4001A52B9 /* Mokkin.mp3 */,
 				BFFEA434221E815600A11712 /* Settings.bundle */,
 				BF1F225221A3AEF70021DB8F /* Main.storyboard */,
 				BF2DBB86221FCB1D00D53DF3 /* Sound */,
@@ -272,6 +278,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SuperBall/Pods-SuperBall-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Animo/Animo.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SpriteKitEasingSwift/SpriteKitEasingSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/TapticEngine/TapticEngine.framework",
 			);
@@ -280,6 +287,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Animo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpriteKitEasingSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TapticEngine.framework",
 			);
@@ -314,10 +322,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF1F226121A3AF9A0021DB8F /* Ball.swift in Sources */,
+				BF97FBE32220FD12001A52B9 /* PlaySound.swift in Sources */,
 				BF2DEE3921DA1243000F140D /* Particle.swift in Sources */,
 				BF1F224F21A3AEF70021DB8F /* GameScene.swift in Sources */,
 				BF2346D021B671B30072E571 /* Score.swift in Sources */,
 				BF1F226521A3AFCE0021DB8F /* Referee.swift in Sources */,
+				BF97FBE1221FE087001A52B9 /* HomeView.swift in Sources */,
 				BF1F225121A3AEF70021DB8F /* GameViewController.swift in Sources */,
 				BF1F224921A3AEF70021DB8F /* AppDelegate.swift in Sources */,
 				BF2DEE3521D5EE35000F140D /* Timer.swift in Sources */,

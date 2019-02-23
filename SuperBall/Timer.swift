@@ -34,8 +34,13 @@ class GameTimer {
       TimerLabel.position = CGPoint(x: TimerLabelPositionX, y: TimerLabelPositionY)
    }
    
-   public func StartTimer() {
+   public func StartTimer(){
       self.MyTimer = Timer.scheduledTimer(timeInterval: TimeInterVal, target: self, selector: #selector(GameTimer.TimerUpdate(timer:)), userInfo: nil, repeats: true)
+   }
+   
+   public func StopTimer() -> Float{
+      self.MyTimer.invalidate()
+      return TimeCount
    }
    
    // TimerのtimeIntervalで指定された秒数毎に呼び出されるメソッド

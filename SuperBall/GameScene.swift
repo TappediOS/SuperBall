@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 import AudioToolbox
+import SCLAlertView
 
 class GameScene: SKScene {
     
@@ -23,7 +24,9 @@ class GameScene: SKScene {
    private var CountForExistConbo = 0
    
    private let Time = GameTimer()
-    
+   
+   
+   
     override func didMove(to view: SKView) {
 
       //ビューの長さを取得
@@ -43,6 +46,9 @@ class GameScene: SKScene {
       NotificationCenter.default.addObserver(self, selector: #selector(MoveCatchNotification(notification:)), name: .MoveBall, object: nil)
       //移動後に、揃ってるかの確認したいから通知を受け取る。。
       NotificationCenter.default.addObserver(self, selector: #selector(FinishMoveCatchNotification(notification:)), name: .FinishMove, object: nil)
+      
+      
+      
     }
    
    
@@ -337,8 +343,25 @@ class GameScene: SKScene {
       print("\nstage[\(x)][\(y)]が一致しています。\n")
    }
    
+   
+   //MARK:- ゲーム終了！
    private func GameSet() {
       print("gameSet")
+      let FinTime = Time.StopTimer()
+      print("time = \(FinTime)")
+      ShowGameSetView(FinTime: FinTime)
+      
+   }
+   
+   private func ShowGameSetView(FinTime: Float){
+      
+      let GameSetView = SCLAlertView()
+      GameSetView.addButton("Button1"){
+         print("tap")
+         let SentObject: [String : Any] = ["UserTime": FinTime]
+         NotificationCenter.default.post(name: .FinGame, object: nil, userInfo: SentObject)
+      }
+      GameSetView.showSuccess("Compleate", subTitle: "Time:\(FinTime)")
    }
    
    //MARK:- スコアを上げる関数

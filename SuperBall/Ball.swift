@@ -33,6 +33,8 @@ class ball :SKSpriteNode {
    private var AfterMovedPointY: CGFloat     //これがないと移動後に位置がずれる
    
    public var YouAreJustDead = false
+   
+   private var GameSound = GameSounds()
  
    
    
@@ -252,8 +254,11 @@ class ball :SKSpriteNode {
          print("移動中です。(StartPoint)")
          return
       }
+      
       Play3Dtouch()
-
+      self.GameSound.PlaySounds()
+      
+      
       print("--- ball info ---")
       print("ball num is \(self.SelfNumber)")
       print("ball posi is [\(self.PositionX)][\(self.PositionY)]")

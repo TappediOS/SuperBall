@@ -13,7 +13,7 @@ import AudioToolbox
 
 class ScoreSet {
    
-   private let FinalScore = 1750
+   private let FinalScore = 1750  //1750
    
    public var Level:Int = 0
    private let LevelMax = 10
@@ -33,7 +33,7 @@ class ScoreSet {
    private let FadeOutAnimationSpeed: Double = 0.17
    private let FadeInAnimationSpeed: Double = 0.196
    private let ReSetComboAnimationSpeed: Double = 0.09
-   private let LevelUpAnimationSpeed: Double = 1
+   private var LevelUpAnimationSpeed: Double = 2
    
    private var ComboLabelPositionX: CGFloat = 0
    private var ComboLabelPositionY: CGFloat = 0
@@ -42,6 +42,8 @@ class ScoreSet {
    private var LebelUpLabelPositionY: CGFloat = 0
    
    private var LebelUpLabelPositionXAfterMove: CGFloat = 0
+   
+   
    
    init() {
       ScoreLabel.fontSize = 100
@@ -155,14 +157,14 @@ class ScoreSet {
    private func ComboUpLabelAnimation(){
       self.ComboUpLabel.isHidden = false
       
-      let FadeOut = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 0.01, fromValue: 1, toValue: 0.04)
+      //let FadeOut = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 0.01, fromValue: 1, toValue: 0.04)
    }
    
    public func ScoreUp(CountOfDis: Int) -> Bool{
       ScoreUpAnimation(CountOfDis: CountOfDis)
       ComboUpLabelAnimation()
       
-      if self.YourScore > FinalScore {
+      if self.YourScore >= FinalScore {
          return true
       }
       
@@ -171,13 +173,14 @@ class ScoreSet {
    
    private func LevelUpAnimation() {
       
-      let RightAnimation = SKEase.move(easeFunction: .curveTypeExpo,
-                                       easeType: .easeTypeIn,
+      let RightAnimation = SKEase.move(easeFunction: .curveTypeQuartic,
+                                       easeType: .easeTypeOut,
                                        time: LevelUpAnimationSpeed,
                                        from: CGPoint(x: LebelUpLabelPositionX, y: LebelUpLabelPositionY),
                                        to: CGPoint(x: LebelUpLabelPositionXAfterMove, y: LebelUpLabelPositionY))
       
       self.LebelUpLabel.run(RightAnimation)
+      self.LevelUpAnimationSpeed -= 0.05
       
    }
    
