@@ -34,7 +34,7 @@ class ball :SKSpriteNode {
    
    public var YouAreJustDead = false
    
-   private var GameSound = GameSounds()
+   
  
    
    
@@ -183,6 +183,14 @@ class ball :SKSpriteNode {
       NotificationCenter.default.post(name: .FinishMove, object: nil, userInfo: SentObject)
    }
    
+   private func PostNotifivationForPlaySound(BallNum: Int) {
+      
+      let SentObject: [String : Any] = ["BallNum": BallNum as Int]
+      
+      print("")
+      NotificationCenter.default.post(name: .PlaySoundNotifi, object: nil, userInfo: SentObject)
+   }
+   
    
    /// スワイプされた方向をNotificationに送信する
    ///
@@ -250,13 +258,15 @@ class ball :SKSpriteNode {
          return
       }
       
+      PostNotifivationForPlaySound(BallNum: self.SelfNumber)
+      
       guard self.AreYouMoved == true else {
          print("移動中です。(StartPoint)")
          return
       }
       
       Play3Dtouch()
-      self.GameSound.PlaySounds()
+      
       
       
       print("--- ball info ---")

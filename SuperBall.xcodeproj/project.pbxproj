@@ -21,7 +21,6 @@
 		BF1F226521A3AFCE0021DB8F /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226421A3AFCE0021DB8F /* Referee.swift */; };
 		BF1F226721A542110021DB8F /* ExNotiificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1F226621A542110021DB8F /* ExNotiificationName.swift */; };
 		BF2346D021B671B30072E571 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2346CF21B671B20072E571 /* Score.swift */; };
-		BF2DBB87221FCB1D00D53DF3 /* Sound in Resources */ = {isa = PBXBuildFile; fileRef = BF2DBB86221FCB1D00D53DF3 /* Sound */; };
 		BF2DEE3521D5EE35000F140D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3421D5EE35000F140D /* Timer.swift */; };
 		BF2DEE3921DA1243000F140D /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2DEE3821DA1243000F140D /* Particle.swift */; };
 		BF97FBE1221FE087001A52B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF97FBE0221FE087001A52B9 /* HomeView.swift */; };
@@ -36,6 +35,16 @@
 		BFAA118521DB55F9004BEFC7 /* RemoveParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */; };
 		BFAA118621DB55F9004BEFC7 /* RemoveParticle5.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */; };
 		BFAA118721DB55F9004BEFC7 /* RemoveParticle8.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */; };
+		BFC07095222108E900C77026 /* So_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC0708B222108E800C77026 /* So_Mokkin.mp3 */; };
+		BFC07096222108E900C77026 /* Mi2_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC0708C222108E800C77026 /* Mi2_Mokkin.mp3 */; };
+		BFC07097222108E900C77026 /* Fa_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC0708D222108E800C77026 /* Fa_Mokkin.mp3 */; };
+		BFC07098222108E900C77026 /* Mi_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC0708E222108E800C77026 /* Mi_Mokkin.mp3 */; };
+		BFC07099222108E900C77026 /* Do_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC0708F222108E900C77026 /* Do_Mokkin.mp3 */; };
+		BFC0709A222108E900C77026 /* Do2_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC07090222108E900C77026 /* Do2_Mokkin.mp3 */; };
+		BFC0709B222108E900C77026 /* Si_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC07091222108E900C77026 /* Si_Mokkin.mp3 */; };
+		BFC0709C222108E900C77026 /* Ra_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC07092222108E900C77026 /* Ra_Mokkin.mp3 */; };
+		BFC0709D222108E900C77026 /* Re_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC07093222108E900C77026 /* Re_Mokkin.mp3 */; };
+		BFC0709E222108E900C77026 /* Re2_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC07094222108E900C77026 /* Re2_Mokkin.mp3 */; };
 		BFFEA435221E815600A11712 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFFEA434221E815600A11712 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -57,12 +66,10 @@
 		BF1F226421A3AFCE0021DB8F /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referee.swift; sourceTree = "<group>"; };
 		BF1F226621A542110021DB8F /* ExNotiificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExNotiificationName.swift; sourceTree = "<group>"; };
 		BF2346CF21B671B20072E571 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
-		BF2DBB86221FCB1D00D53DF3 /* Sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sound; sourceTree = "<group>"; };
 		BF2DEE3421D5EE35000F140D /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		BF2DEE3821DA1243000F140D /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		BF97FBE0221FE087001A52B9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BF97FBE22220FD12001A52B9 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
-		BF97FBE4222103E4001A52B9 /* Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Mokkin.mp3; sourceTree = "<group>"; };
 		BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle9.sks; sourceTree = "<group>"; };
 		BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle2.sks; sourceTree = "<group>"; };
 		BFAA117621DB55F8004BEFC7 /* RemoveParticle7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle7.sks; sourceTree = "<group>"; };
@@ -73,6 +80,16 @@
 		BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle.sks; sourceTree = "<group>"; };
 		BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle5.sks; sourceTree = "<group>"; };
 		BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RemoveParticle8.sks; sourceTree = "<group>"; };
+		BFC0708B222108E800C77026 /* So_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = So_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC0708C222108E800C77026 /* Mi2_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Mi2_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC0708D222108E800C77026 /* Fa_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Fa_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC0708E222108E800C77026 /* Mi_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Mi_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC0708F222108E900C77026 /* Do_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Do_Mokkin.mp3; path = ../../../../Music/GarageBand/Do_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC07090222108E900C77026 /* Do2_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Do2_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC07091222108E900C77026 /* Si_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Si_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC07092222108E900C77026 /* Ra_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ra_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC07093222108E900C77026 /* Re_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Re_Mokkin.mp3; sourceTree = "<group>"; };
+		BFC07094222108E900C77026 /* Re2_Mokkin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Re2_Mokkin.mp3; sourceTree = "<group>"; };
 		BFFEA434221E815600A11712 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../../../Downloads/Settings.bundle; sourceTree = "<group>"; };
 		CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,15 +168,32 @@
 				BF2DEE3821DA1243000F140D /* Particle.swift */,
 				BF1F226221A3AFB40021DB8F /* Stage.swift */,
 				BF1F226421A3AFCE0021DB8F /* Referee.swift */,
-				BF97FBE4222103E4001A52B9 /* Mokkin.mp3 */,
+				BFC0708A2221062D00C77026 /* GameSoundFile */,
 				BFFEA434221E815600A11712 /* Settings.bundle */,
 				BF1F225221A3AEF70021DB8F /* Main.storyboard */,
-				BF2DBB86221FCB1D00D53DF3 /* Sound */,
 				BF1F225521A3AEF70021DB8F /* Assets.xcassets */,
 				BF1F225721A3AEF70021DB8F /* LaunchScreen.storyboard */,
 				BF1F225A21A3AEF70021DB8F /* Info.plist */,
 			);
 			path = SuperBall;
+			sourceTree = "<group>";
+		};
+		BFC0708A2221062D00C77026 /* GameSoundFile */ = {
+			isa = PBXGroup;
+			children = (
+				BFC0708F222108E900C77026 /* Do_Mokkin.mp3 */,
+				BFC07090222108E900C77026 /* Do2_Mokkin.mp3 */,
+				BFC0708D222108E800C77026 /* Fa_Mokkin.mp3 */,
+				BFC0708E222108E800C77026 /* Mi_Mokkin.mp3 */,
+				BFC0708C222108E800C77026 /* Mi2_Mokkin.mp3 */,
+				BFC07092222108E900C77026 /* Ra_Mokkin.mp3 */,
+				BFC07093222108E900C77026 /* Re_Mokkin.mp3 */,
+				BFC07094222108E900C77026 /* Re2_Mokkin.mp3 */,
+				BFC07091222108E900C77026 /* Si_Mokkin.mp3 */,
+				BFC0708B222108E800C77026 /* So_Mokkin.mp3 */,
+			);
+			name = GameSoundFile;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,19 +259,28 @@
 			files = (
 				BFAA118721DB55F9004BEFC7 /* RemoveParticle8.sks in Resources */,
 				BF1F225421A3AEF70021DB8F /* Main.storyboard in Resources */,
+				BFC0709B222108E900C77026 /* Si_Mokkin.mp3 in Resources */,
 				BFAA118021DB55F9004BEFC7 /* RemoveParticle7.sks in Resources */,
 				BF1F224B21A3AEF70021DB8F /* GameScene.sks in Resources */,
 				BFAA118321DB55F9004BEFC7 /* RemoveParticle3.sks in Resources */,
+				BFC0709C222108E900C77026 /* Ra_Mokkin.mp3 in Resources */,
+				BFC0709A222108E900C77026 /* Do2_Mokkin.mp3 in Resources */,
 				BF1F225621A3AEF70021DB8F /* Assets.xcassets in Resources */,
+				BFC07097222108E900C77026 /* Fa_Mokkin.mp3 in Resources */,
 				BFAA117F21DB55F9004BEFC7 /* RemoveParticle2.sks in Resources */,
+				BFC07095222108E900C77026 /* So_Mokkin.mp3 in Resources */,
+				BFC07098222108E900C77026 /* Mi_Mokkin.mp3 in Resources */,
 				BFAA118521DB55F9004BEFC7 /* RemoveParticle.sks in Resources */,
-				BF2DBB87221FCB1D00D53DF3 /* Sound in Resources */,
 				BFFEA435221E815600A11712 /* Settings.bundle in Resources */,
+				BFC0709D222108E900C77026 /* Re_Mokkin.mp3 in Resources */,
+				BFC07096222108E900C77026 /* Mi2_Mokkin.mp3 in Resources */,
+				BFC0709E222108E900C77026 /* Re2_Mokkin.mp3 in Resources */,
 				BFAA118121DB55F9004BEFC7 /* RemoveParticle10.sks in Resources */,
 				BFAA118621DB55F9004BEFC7 /* RemoveParticle5.sks in Resources */,
 				BF1F225921A3AEF70021DB8F /* LaunchScreen.storyboard in Resources */,
 				BFAA117E21DB55F9004BEFC7 /* RemoveParticle9.sks in Resources */,
 				BFAA118221DB55F9004BEFC7 /* RemoveParticle6.sks in Resources */,
+				BFC07099222108E900C77026 /* Do_Mokkin.mp3 in Resources */,
 				BFAA118421DB55F9004BEFC7 /* RemoveParticle4.sks in Resources */,
 				BF1F224D21A3AEF70021DB8F /* Actions.sks in Resources */,
 			);

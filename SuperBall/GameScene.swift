@@ -25,7 +25,7 @@ class GameScene: SKScene {
    
    private let Time = GameTimer()
    
-   
+   private var GameSound = GameSounds()
    
     override func didMove(to view: SKView) {
 
@@ -46,6 +46,8 @@ class GameScene: SKScene {
       NotificationCenter.default.addObserver(self, selector: #selector(MoveCatchNotification(notification:)), name: .MoveBall, object: nil)
       //移動後に、揃ってるかの確認したいから通知を受け取る。。
       NotificationCenter.default.addObserver(self, selector: #selector(FinishMoveCatchNotification(notification:)), name: .FinishMove, object: nil)
+      
+      NotificationCenter.default.addObserver(self, selector: #selector(PlaySoundNotification(notification:)), name: .PlaySoundNotifi, object: nil)
       
       
       
@@ -318,6 +320,7 @@ class GameScene: SKScene {
          print("\nSentedX = \(SentedX)")
          print("SentedY = \(SentedY)")
          print("Vect = \(Vect)")
+         //GameSound.PlaySounds(BallNumber: AllBall[SentedX][SentedY - 1].SelfNumber)
          CheckMoveDoubleBall(FirstX: SentedX, FirstY: SentedY, Vect: Vect)
       }else{
          print("通知受け取ったけど、中身nilやった。")
@@ -333,6 +336,18 @@ class GameScene: SKScene {
          let x = userInfo["x"] as! Int
          let y = userInfo["y"] as! Int
          CheckStage(x: x, y: y)
+      }else{
+         print("通知受け取ったけど、中身nilやった。")
+      }
+      return
+   }
+   
+   @objc func PlaySoundNotification(notification: Notification) -> Void {
+      print("--- Play Sounds notification ---")
+      
+      if let userInfo = notification.userInfo {
+         let BallNumber = userInfo["BallNum"] as! Int
+         GameSound.PlaySounds(BallNumber: BallNumber)
       }else{
          print("通知受け取ったけど、中身nilやった。")
       }
