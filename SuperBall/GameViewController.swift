@@ -9,17 +9,23 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GameKit
+import Firebase
+import Crashlytics
 
-class GameViewController: UIViewController {
-   
+class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADInterstitialDelegate {
    
    var userDefaults: UserDefaults = UserDefaults.standard
+   
+   let LEADERBOARD_ID = "BestTimeLeaderBoard"
+   
+   var Interstitial: GADInterstitial!
+   let ADMOBTEST_ID = "ca-app-pub-3940256099942544/4411468910"
+   let ADMOB_ID = "ca-app-pub-1460017825820383/3183891685"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-      
-        
+   
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -40,18 +46,65 @@ class GameViewController: UIViewController {
             view.showsFPS = false
             view.showsNodeCount = false
          #endif
-         
-         
-         
             view.backgroundColor = UIColor.white
         }
       
+      
+      InitInstitial()
       
       //移動後に、揃ってるかの確認したいから通知を受け取る。。
       NotificationCenter.default.addObserver(self, selector: #selector(FinGameCatchNotification(notification:)), name: .FinGame, object: nil)
       
     }
    
+   func InitInstitial() {
+      
+      #if DEBUG
+         print("インターステイシャル:テスト環境")
+         Interstitial = GADInterstitial(adUnitID: ADMOBTEST_ID)
+         if let ADID = Interstitial.adUnitID {
+            print("テスト広告ID読み込み完了")
+            print("TestID = \(ADID)")
+         }else{
+            print("テスト広告ID読み込み失敗")
+         }
+      #else
+         print("インターステイシャル:本番環境")
+         Interstitial = GADInterstitial(adUnitID: ADMOB_ID)
+      #endif
+      
+      self.Interstitial.delegate = self
+      Interstitial.load(GADRequest())
+   }
+   
+   
+   private func PostTimeToGameCenter(PostTime: Float) {
+      
+      #if DEBUG
+         return
+      #else
+     
+      #endif
+      
+      let YourPostTime = Int(PostTime * 100)
+      
+      print("Float = \(PostTime)")
+      print("Int = \(YourPostTime)")
+      
+      let SendScore: GKScore = GKScore()
+      SendScore.value = Int64(YourPostTime)
+      SendScore.leaderboardIdentifier = self.LEADERBOARD_ID
+      
+      let scoreArr: [GKScore] = [SendScore]
+      GKScore.report(scoreArr, withCompletionHandler: {(error: NSError?) -> Void in
+         if error != nil {
+            print("スコア:\(PostTime) をゲームセンターに送信成功")
+         } else {
+            print("スコア:\(PostTime) をゲームセンターに送信できませんでした。")
+         }
+         } as? (Error?) -> Void)
+      //send score finished
+   }
    
    private func CheckHightScoreTime(UserTimeThatThisGame: Float){
       
@@ -61,14 +114,33 @@ class GameViewController: UIViewController {
       if userDefaults.object(forKey: "HeightScoreTime") == nil {
          userDefaults.set(UserTimeThatThisGame, forKey: "HeightScoreTime")
          userDefaults.synchronize()
+         
+         PostTimeToGameCenter(PostTime: UserTimeThatThisGame)
       }
       
       if NowUserHightScoreTime > UserTimeThatThisGame {
          
+         print("ハイスコア更新しました。\nデータをゲームセンターに送信します。")
+         
          userDefaults.set(UserTimeThatThisGame, forKey: "HeightScoreTime")
          userDefaults.synchronize()
+         
+         PostTimeToGameCenter(PostTime: UserTimeThatThisGame)
       }
       
+      print("ハイスコア更新はいしません。")
+      
+   }
+   
+   func ShowInterstitial(){
+      
+      if Interstitial.isReady {
+         print("広告の準備できてるからpresentする!")
+         Interstitial.present(fromRootViewController: self)
+      }else{
+         print("広告あかんかったからそのまま戻る")
+         self.dismiss(animated: true, completion: nil)
+      }
    }
    
    //MARK:- 通知を受け取る関数郡
@@ -84,7 +156,47 @@ class GameViewController: UIViewController {
          print("通知受け取ったけど、中身nilやった。")
       }
       
-      self.dismiss(animated: true)
+      
+      //MARK:- ここで閉じる
+      ShowInterstitial()
+     
+   }
+   
+   
+   //広告の読み込みが完了した時
+   func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+      print("\n-- Interstitial広告の読み込み完了 --\n")
+      Analytics.logEvent("AdReadyOK", parameters: nil)
+   }
+   //広告の読み込みが失敗した時
+   func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+      print("\n-- Interstitial広告の読み込み失敗 --\n")
+      Analytics.logEvent("AdNotReady", parameters: nil)
+      
+   }
+   //広告画面が開いた時
+   func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+      print("広告開いた")
+   }
+   //広告をクリックして開いた画面を閉じる直前
+   func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+      print("閉じる直前")
+   }
+   //広告をクリックして開いた画面を閉じる直後
+   func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+      print("閉じる直後")
+      AudioServicesPlaySystemSound(1519)
+      self.dismiss(animated: true, completion: nil)
+   }
+   //広告をクリックした時
+   func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+      print("ボタンクリックした")
+   }
+   
+   
+   //GKGameCenterControllerDelegate実装用
+   func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+      gameCenterViewController.dismiss(animated: true, completion: nil)
    }
 
     override var shouldAutorotate: Bool {
