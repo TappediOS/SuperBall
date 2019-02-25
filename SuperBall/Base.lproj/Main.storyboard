@@ -27,27 +27,20 @@
                                     <segue destination="BV1-FR-VrT" kind="presentation" id="qei-TH-pdJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b58-fy-chS">
-                                <rect key="frame" x="21" y="20" width="338" height="86"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="338" id="Ibh-sw-AgT"/>
-                                    <constraint firstAttribute="height" constant="86" id="mt0-a1-347"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b58-fy-chS">
+                                <rect key="frame" x="21" y="20" width="42" height="20.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="b58-fy-chS" firstAttribute="leading" secondItem="Zjj-x0-SXe" secondAttribute="leading" constant="21" id="QyC-cx-ouw"/>
-                            <constraint firstItem="b58-fy-chS" firstAttribute="top" secondItem="Zjj-x0-SXe" secondAttribute="top" id="bjk-GQ-Qvd"/>
-                            <constraint firstItem="b58-fy-chS" firstAttribute="leading" secondItem="Zjj-x0-SXe" secondAttribute="leading" constant="21" id="udA-ZL-Jba"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Zjj-x0-SXe"/>
                     </view>
                     <connections>
                         <outlet property="HeightScore" destination="b58-fy-chS" id="R1E-zb-ZvW"/>
+                        <outlet property="StartButton" destination="euY-ME-v2D" id="dEe-fP-suM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZL-L6-dff" userLabel="First Responder" sceneMemberID="firstResponder"/>

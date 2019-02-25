@@ -57,6 +57,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
       
     }
    
+   //MARK:- 広告初期化
    func InitInstitial() {
       
       #if DEBUG
@@ -78,6 +79,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
    }
    
    
+   //MARK:- ゲームセンターにデータを送信する関数
    private func PostTimeToGameCenter(PostTime: Float) {
       
       #if DEBUG
@@ -106,11 +108,12 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
       //send score finished
    }
    
+   //MARK:- スコアの更新確認を行う。
    private func CheckHightScoreTime(UserTimeThatThisGame: Float){
       
       let NowUserHightScoreTime = userDefaults.float(forKey: "HeightScoreTime")
       
-      //first time
+      //MARK: 強制的にデータ送信
       if userDefaults.object(forKey: "HeightScoreTime") == nil {
          userDefaults.set(UserTimeThatThisGame, forKey: "HeightScoreTime")
          userDefaults.synchronize()
@@ -118,6 +121,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
          PostTimeToGameCenter(PostTime: UserTimeThatThisGame)
       }
       
+      //MARK: 記録更新したらデータ送信する。
       if NowUserHightScoreTime > UserTimeThatThisGame {
          
          print("ハイスコア更新しました。\nデータをゲームセンターに送信します。")
@@ -132,6 +136,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
       
    }
    
+   //MARK:- 広告表示する
    func ShowInterstitial(){
       
       if Interstitial.isReady {
@@ -163,6 +168,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
    }
    
    
+   //MARK:- 広告のデリゲート群
    //広告の読み込みが完了した時
    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
       print("\n-- Interstitial広告の読み込み完了 --\n")
@@ -194,7 +200,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
    }
    
    
-   //GKGameCenterControllerDelegate実装用
+   //MARK:- GKGameCenterControllerDelegate実装用
    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
       gameCenterViewController.dismiss(animated: true, completion: nil)
    }

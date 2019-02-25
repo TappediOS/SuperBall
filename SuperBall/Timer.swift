@@ -22,13 +22,14 @@ class GameTimer {
    }
    
    public func InitTimer(ViewX: Int, ViewY: Int) {
-      let Wide = ViewX / 2 + ViewX / 5
-      let Hight = ViewY / 3
+    
+      let Wide = ViewX / 10
+      let Internal = Wide / 4
+      let Hight = ViewY / 3  - Int(TimerLabel.fontSize / 2)
       
-      let Intarnal = ViewX / 25
-      let FirstZure = -ViewX * 2 / 5   //位置ズレ防止
+      let HalfViewX = ViewX / 2
       
-      let TimerLabelPositionX = FirstZure + Intarnal  + Wide
+      let TimerLabelPositionX = Internal + Wide * 4 + Internal + Wide * 2 + Internal + (Wide * 3) / 2 - HalfViewX
       let TimerLabelPositionY = Hight
       
       TimerLabel.position = CGPoint(x: TimerLabelPositionX, y: TimerLabelPositionY)

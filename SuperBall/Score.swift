@@ -18,7 +18,7 @@ class ScoreSet {
    public var Level:Int = 0
    private let LevelMax = 10
    public let ScoreForLevelUP = 250
-   private let Base: Int = 15
+   private let Base: Int = 13
    var YourScore: Int = 0
    var Combo: Int = 0
    
@@ -26,14 +26,19 @@ class ScoreSet {
    
    var ScoreLabel: SKLabelNode = SKLabelNode(text: String(0))
    var ComboLabel: SKLabelNode = SKLabelNode(text: String(0))
-   var ComboUpLabel: SKLabelNode = SKLabelNode(text: "0")
+   //var ComboUpLabel: SKLabelNode = SKLabelNode(text: "0")
    
    var LebelUpLabel: SKLabelNode = SKLabelNode(text: "Level Up!")
+   
+   var score: SKLabelNode
+   var combo: SKLabelNode
+   var time: SKLabelNode
    
    private let FadeOutAnimationSpeed: Double = 0.17
    private let FadeInAnimationSpeed: Double = 0.196
    private let ReSetComboAnimationSpeed: Double = 0.09
-   private var LevelUpAnimationSpeed: Double = 2
+   private var LevelUpAnimationSpeed: Double = 2.2
+   private let LevelUpAnimationSpeed_SpeedUp = 0.05
    
    private var ComboLabelPositionX: CGFloat = 0
    private var ComboLabelPositionY: CGFloat = 0
@@ -48,25 +53,59 @@ class ScoreSet {
    init() {
       ScoreLabel.fontSize = 100
       ComboLabel.fontSize = 100
-      LebelUpLabel.fontSize = 200
-      ComboUpLabel.fontSize = ComboLabel.fontSize / 2
+      LebelUpLabel.fontSize = 180
+
+      score = SKLabelNode(text: "Score")
+      combo = SKLabelNode(text: "Combo")
+      time = SKLabelNode(text: "Time")
+      
+      score.fontSize = 50
+      combo.fontSize = 50
+      time.fontSize = 50
+   }
+   
+   public func InitLabel(ViewX: Int, ViewY: Int){
+      
+      let Wide = ViewX / 10
+      let Internal = Wide / 4
+      let Hight = ViewY / 3 + Int(ScoreLabel.fontSize / 2) + Int(score.fontSize / 2)
+      
+      let HalfViewX = ViewX / 2
+      
+      let ScoreLabelPositionX = Internal + (Wide * 4) / 2 - HalfViewX
+      let ScoreLabelPositionY = Hight
+      
+      score.position = CGPoint(x: ScoreLabelPositionX, y: ScoreLabelPositionY)
+      combo.position = CGPoint(x: Internal + Wide * 4 + Internal + (Wide * 2) / 2 - HalfViewX, y: Hight)
+      time.position = CGPoint(x: Internal + Wide * 4 + Internal + Wide * 2 + Internal + (Wide * 3) / 2 - HalfViewX, y: Hight)
+      
    }
    
    public func InitScoreLabel(ViewX: Int, ViewY: Int) {
-      let Wide = ViewX / 8
-      let Hight = ViewY / 3
       
-      let Intarnal = ViewX / 25
-      let FirstZure = -ViewX * 2 / 5   //位置ズレ防止
+//      let Wide = ViewX / 8
+//      let Hight = ViewY / 3
+//
+//      let Intarnal = ViewX / 25
+//      let FirstZure = -ViewX * 2 / 5   //位置ズレ防止
+//
+//      let ScoreLabelPositionX = FirstZure + Intarnal  + Wide
+//      let ScoreLabelPositionY = Hight
       
-      let ScoreLabelPositionX = FirstZure + Intarnal  + Wide
+      let Wide = ViewX / 10
+      let Internal = Wide / 4
+      let Hight = ViewY / 3 - Int(ScoreLabel.fontSize / 2)
+      
+      let HalfViewX = ViewX / 2
+      
+      let ScoreLabelPositionX = Internal + (Wide * 4) / 2 - HalfViewX
       let ScoreLabelPositionY = Hight
-      
-      self.ComboLabelPositionX = CGFloat(FirstZure + Intarnal  + Wide * 3)
-      self.ComboLabelPositionY = CGFloat(Hight)
       
       ScoreLabel.position = CGPoint(x: ScoreLabelPositionX, y: ScoreLabelPositionY)
       
+      self.ComboLabelPositionX = CGFloat(Internal + Wide * 4 + Internal + (Wide * 2) / 2 - HalfViewX)
+      self.ComboLabelPositionY = CGFloat(Hight)
+   
       ComboLabel.position = CGPoint(x: ComboLabelPositionX, y: ComboLabelPositionY)
       
       
@@ -76,8 +115,8 @@ class ScoreSet {
       
       LebelUpLabel.position = CGPoint(x: LebelUpLabelPositionX, y: LebelUpLabelPositionY)
       
-      ComboUpLabel.position = CGPoint(x: ComboLabelPositionX , y: ComboLabelPositionY - 20)
-      ComboUpLabel.isHidden = true
+      //ComboUpLabel.position = CGPoint(x: ComboLabelPositionX , y: ComboLabelPositionY - 20)
+      //ComboUpLabel.isHidden = true
    }
    
    public func InitLevel(Level: Int) {
@@ -88,16 +127,12 @@ class ScoreSet {
       
       switch CountOfDis {
       case 2:  //2個消えた
-         ComboUpLabel.text = String(Combo / 3)
-         return self.Base + Combo / 5
+         return self.Base + Combo / 2
       case 4:  //3個消えた
-         ComboUpLabel.text = String(Combo / 2)
-         return self.Base * 2 + Combo / 2
+         return self.Base * 2 + Combo
       case 6:  //4個消えた
-         ComboUpLabel.text = String(Combo)
-         return self.Base * 3 + Combo
+         return self.Base * 3 + Int(Double(Combo) * 1.25)
       default:
-         ComboUpLabel.text = String(Combo / 5)
          print("なんでやねん")
          return self.Base + Combo / 10
       }
@@ -155,7 +190,7 @@ class ScoreSet {
    }
    
    private func ComboUpLabelAnimation(){
-      self.ComboUpLabel.isHidden = false
+      //self.ComboUpLabel.isHidden = false
       
       //let FadeOut = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 0.01, fromValue: 1, toValue: 0.04)
    }
@@ -180,7 +215,7 @@ class ScoreSet {
                                        to: CGPoint(x: LebelUpLabelPositionXAfterMove, y: LebelUpLabelPositionY))
       
       self.LebelUpLabel.run(RightAnimation)
-      self.LevelUpAnimationSpeed -= 0.05
+      self.LevelUpAnimationSpeed -= self.LevelUpAnimationSpeed_SpeedUp
       
    }
    

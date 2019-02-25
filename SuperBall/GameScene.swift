@@ -63,11 +63,15 @@ class GameScene: SKScene {
    
    private func InitScore() {
       Score.InitScoreLabel(ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY))
+      Score.InitLabel(ViewX: Int(OpenStage.ViewSizeX), ViewY: Int(OpenStage.ViewSizeY))
       Score.InitLevel(Level: OpenStage.StageNumMAX)
       addChild(Score.ScoreLabel)
       addChild(Score.ComboLabel)
-      addChild(Score.ComboUpLabel)
+      //addChild(Score.ComboUpLabel)
       addChild(Score.LebelUpLabel)
+      addChild(Score.score)
+      addChild(Score.combo)
+      addChild(Score.time)
    }
    
    private func InitStageSize(SizeX: CGFloat?, SizeY: CGFloat?){
