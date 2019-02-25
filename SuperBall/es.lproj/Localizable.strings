@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  SuperBall
+
+  Created by jun on 2019/02/25.
+  Copyright © 2019 jun. All rights reserved.
+*/
+
+"YourBestTime" = "Tu mejor tiempo";
+"Ranking" = "Clasificación";
+
+"Score" = "Puntuación";
+"Combo" = "Combo";
+"Time" = "Hora";
+
+"Passed" = "petarse el juego !!";
+"Return" = "Regreso";
+
+"NoRecord" = "Sin registro";

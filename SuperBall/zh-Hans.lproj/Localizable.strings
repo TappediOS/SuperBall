@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  SuperBall
+
+  Created by jun on 2019/02/25.
+  Copyright © 2019 jun. All rights reserved.
+*/
+
+"YourBestTime" = "你最好的时间";
+"Ranking" = "排行";
+
+"Score" = "得分了";
+"Combo" = "二合一";
+"Time" = "时间";
+
+"Passed" = "通关 !!";
+"Return" = "返回";
+
+"NoRecord" = "没有记录";

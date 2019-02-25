@@ -81,12 +81,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
    
    //MARK:- ゲームセンターにデータを送信する関数
    private func PostTimeToGameCenter(PostTime: Float) {
-      
-      #if DEBUG
-         return
-      #else
-     
-      #endif
+
       
       let YourPostTime = Int(PostTime * 100)
       
@@ -124,6 +119,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
       //MARK: 記録更新したらデータ送信する。
       if NowUserHightScoreTime > UserTimeThatThisGame {
          
+         Analytics.logEvent("NewLecord", parameters: nil)
          print("ハイスコア更新しました。\nデータをゲームセンターに送信します。")
          
          userDefaults.set(UserTimeThatThisGame, forKey: "HeightScoreTime")
@@ -162,7 +158,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, GADI
       }
       
       
-      //MARK:- ここで閉じる
+      //MARK:- 広告表示する関数に飛ばす
       ShowInterstitial()
      
    }

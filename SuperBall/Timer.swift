@@ -44,6 +44,10 @@ class GameTimer {
       return TimeCount
    }
    
+   public func GetTime() -> Int{
+      return Int(TimeCount * 100)
+   }
+   
    // TimerのtimeIntervalで指定された秒数毎に呼び出されるメソッド
    @objc func TimerUpdate(timer : Timer){
             // カウントの値1増加

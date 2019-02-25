@@ -34,12 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       let filePath = Bundle.main.path(forResource: fileName, ofType: "plist")
       let fileopts = FirebaseOptions(contentsOfFile: filePath!)
-      
-      #if DEBUG
-      #else
-      print("本番です")
+      
       FirebaseApp.configure(options: fileopts!)
-      #endif
       
       //--------------------FIREBASE-----------------------//
       

@@ -43,7 +43,7 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
       
       //first time
       if userDefaults.object(forKey: "HeightScoreTime") == nil {
-         HeightScore.text = "No Record"
+         HeightScore.text = NSLocalizedString("NoRecord", comment: "")
       }else{
          let NowUserHightScoreTime = userDefaults.float(forKey: "HeightScoreTime")
          HeightScore.text = String(NowUserHightScoreTime)
@@ -82,11 +82,12 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
       let Found =  ViewWidth / 8
       let LabelWidth = Found * 6
       
-      YourHightScoreLabel.text = "Your Best Time"
+      YourHightScoreLabel.text = NSLocalizedString("YourBestTime", comment: "")
       YourHightScoreLabel.adjustsFontSizeToFitWidth = true
       YourHightScoreLabel.frame = CGRect(x: Found, y: ViewHeight / 8, width: LabelWidth, height: ViewHeight / 8)
       YourHightScoreLabel.font = UIFont(name: "Helvetica", size: 60)
       YourHightScoreLabel.textColor = UIColor.white
+      YourHightScoreLabel.textAlignment = NSTextAlignment.center
       view.addSubview(YourHightScoreLabel)
       
       HeightScore.frame = CGRect(x: Found, y: (ViewHeight / 8) * 2, width: LabelWidth, height: ViewHeight / 8)
@@ -112,7 +113,7 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
       StartButton.layer.borderWidth = 1
       StartButton.layer.borderColor = UIColor.white.cgColor
       
-      RankingButton.setTitle("Ranking", for: UIControl.State.normal)
+      RankingButton.setTitle(NSLocalizedString("Ranking", comment: ""), for: UIControl.State.normal)
       RankingButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
       RankingButton.backgroundColor = UIColor.init(displayP3Red: 61 / 255, green: 61 / 255, blue: 61 / 255, alpha: 1)
       RankingButton.titleLabel?.font = UIFont(name: "Helvetica", size: 50)
@@ -153,7 +154,7 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
       gcView.viewState = GKGameCenterViewControllerState.leaderboards
       self.present(gcView, animated: true, completion: nil)
       
-      //Analytics.logEvent("LoadRankingView", parameters: nil)
+      Analytics.logEvent("LoadRankingView", parameters: nil)
    }
    
    //MARK:- GKGameCenterControllerDelegate実装用
@@ -176,7 +177,7 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
       
       //first time
       if userDefaults.object(forKey: "HeightScoreTime") == nil {
-         HeightScore.text = "No Record"
+         HeightScore.text = NSLocalizedString("NoRecord", comment: "")
       }else{
          let NowUserHightScoreTime = userDefaults.float(forKey: "HeightScoreTime")
          

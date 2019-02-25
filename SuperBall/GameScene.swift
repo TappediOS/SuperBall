@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 import AudioToolbox
 import SCLAlertView
+import Firebase
 
 class GameScene: SKScene {
     
@@ -26,6 +27,8 @@ class GameScene: SKScene {
    private let Time = GameTimer()
    
    private var GameSound = GameSounds()
+   
+   private var userDefaults = UserDefaults.standard
    
     override func didMove(to view: SKView) {
 
@@ -363,24 +366,120 @@ class GameScene: SKScene {
    }
    
    
+   //MARK:- Firebaeにデータ送信
+   func PostInfomationToFireBase() {
+      
+      switch Score.GetMaxCombo() {
+      case 0 ... 9:
+         Analytics.logEvent("MaxCombo0to9", parameters: nil)
+      case 10 ... 19:
+         Analytics.logEvent("MaxCombo10to19", parameters: nil)
+      case 20 ... 29:
+         Analytics.logEvent("MaxCombo20to29", parameters: nil)
+      case 30 ... 39:
+         Analytics.logEvent("MaxCombo30to39", parameters: nil)
+      case 40 ... 49:
+         Analytics.logEvent("MaxCombo40to49", parameters: nil)
+      case 50 ... 59:
+         Analytics.logEvent("MaxCombo50to59", parameters: nil)
+      case 60 ... 69:
+         Analytics.logEvent("MaxCombo60to69", parameters: nil)
+      case 70 ... 79:
+         Analytics.logEvent("MaxCombo70to79", parameters: nil)
+      case 80 ... 1000:
+         Analytics.logEvent("MaxComboOver80", parameters: nil)
+      default:
+         break
+      }
+      
+      print("Time is \(Time.GetTime())")
+      
+      switch  Time.GetTime(){
+      case 0 ... 999:
+         Analytics.logEvent("ClearTime0to9", parameters: nil)
+      case 1000 ... 1999:
+         Analytics.logEvent("ClearTime10to19", parameters: nil)
+      case 2000 ... 2999:
+         Analytics.logEvent("ClearTime20to29", parameters: nil)
+      case 3000 ... 3999:
+         Analytics.logEvent("ClearTime30to39", parameters: nil)
+      case 4000 ... 4999:
+         Analytics.logEvent("ClearTime40to49", parameters: nil)
+      case 5000 ... 5499:
+         Analytics.logEvent("ClearTime50to54", parameters: nil)
+      case 5500 ... 5999:
+         Analytics.logEvent("ClearTime55to59", parameters: nil)
+      case 6000 ... 6499:
+         Analytics.logEvent("ClearTime60to65", parameters: nil)
+      case 6500 ... 6999:
+         Analytics.logEvent("ClearTime65to69", parameters: nil)
+      case 7000 ... 7499:
+         Analytics.logEvent("ClearTime70to74", parameters: nil)
+      case 7500 ... 7999:
+         Analytics.logEvent("ClearTime75to79", parameters: nil)
+      case 8000 ... 8499:
+         Analytics.logEvent("ClearTime80to84", parameters: nil)
+      case 8500 ... 8999:
+         Analytics.logEvent("ClearTime85to89", parameters: nil)
+      case 9000 ... 9499:
+         Analytics.logEvent("ClearTime90to94", parameters: nil)
+      case 9500 ... 9999:
+         Analytics.logEvent("ClearTime95to99", parameters: nil)
+      case 10000 ... 10999:
+         Analytics.logEvent("ClearTime100to119", parameters: nil)
+      case 11000 ... 11999:
+         Analytics.logEvent("ClearTime110to119", parameters: nil)
+      case 12000 ... 12999:
+         Analytics.logEvent("ClearTime120to129", parameters: nil)
+      case 13000 ... 13999:
+         Analytics.logEvent("ClearTime130to139", parameters: nil)
+      case 14000 ... 14999:
+         Analytics.logEvent("ClearTime140to149", parameters: nil)
+      case 15000 ... 15999:
+         Analytics.logEvent("ClearTime150to159", parameters: nil)
+      default:
+         Analytics.logEvent("ClearTimeOver160", parameters: nil)
+      }
+   }
+   
    //MARK:- ゲーム終了！
    private func GameSet() {
       print("gameSet")
       let FinTime = Time.StopTimer()
       print("time = \(FinTime)")
+      PostInfomationToFireBase()
       ShowGameSetView(FinTime: FinTime)
       
    }
    
    private func ShowGameSetView(FinTime: Float){
       
-      let GameSetView = SCLAlertView()
-      GameSetView.addButton("Button1"){
+      let Appearanse = SCLAlertView.SCLAppearance(showCloseButton: false)
+      let GameSetView = SCLAlertView(appearance: Appearanse)
+      GameSetView.addButton("Return"){
          print("tap")
          let SentObject: [String : Any] = ["UserTime": FinTime]
          NotificationCenter.default.post(name: .FinGame, object: nil, userInfo: SentObject)
       }
-      GameSetView.showSuccess("Compleate", subTitle: "Time:\(FinTime)")
+      
+      
+      //first time
+      if userDefaults.object(forKey: "HeightScoreTime") == nil {
+         let YourBestTime = NSLocalizedString("YourBestTime", comment: "")
+         let tiime = NSLocalizedString("Time", comment: "")
+         let NoRecord = NSLocalizedString("NoRecord", comment: "")
+         GameSetView.showSuccess(NSLocalizedString("Passed", comment: ""), subTitle: "\(tiime)\n\(FinTime)\n\n\(YourBestTime)\n\(NoRecord)")
+      }else{
+         let YourBestTime = NSLocalizedString("YourBestTime", comment: "")
+         let tiime = NSLocalizedString("Time", comment: "")
+         
+         let NowUserHightScoreTime = userDefaults.float(forKey: "HeightScoreTime")
+         GameSetView.showSuccess(NSLocalizedString("Passed", comment: ""), subTitle: "\(tiime)\n\(FinTime)\n\n\(YourBestTime)\n\(NowUserHightScoreTime)")
+      }
+      
+      
+      
+      
    }
    
    //MARK:- スコアを上げる関数

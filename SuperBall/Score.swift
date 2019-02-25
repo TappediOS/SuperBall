@@ -22,6 +22,8 @@ class ScoreSet {
    var YourScore: Int = 0
    var Combo: Int = 0
    
+   var MaxCombo: Int = 0
+   
    private let ScoreUpAnimationTime = 0.8
    
    var ScoreLabel: SKLabelNode = SKLabelNode(text: String(0))
@@ -55,9 +57,9 @@ class ScoreSet {
       ComboLabel.fontSize = 100
       LebelUpLabel.fontSize = 180
 
-      score = SKLabelNode(text: "Score")
-      combo = SKLabelNode(text: "Combo")
-      time = SKLabelNode(text: "Time")
+      score = SKLabelNode(text: NSLocalizedString("Score", comment: ""))
+      combo = SKLabelNode(text: NSLocalizedString("Combo", comment: ""))
+      time = SKLabelNode(text: NSLocalizedString("Time", comment: ""))
       
       score.fontSize = 50
       combo.fontSize = 50
@@ -159,7 +161,14 @@ class ScoreSet {
       AudioServicesPlaySystemSound( 1102 )
    }
    
+   public func GetMaxCombo() -> Int {
+      return self.MaxCombo
+   }
+   
    public func ResetCombo() {
+      if self.Combo >= self.MaxCombo {
+         self.MaxCombo = self.Combo
+      }
       self.Combo = 0
       ResetComboAnimation()
       self.ComboLabel.text = String(self.Combo)
