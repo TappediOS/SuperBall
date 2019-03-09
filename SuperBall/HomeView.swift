@@ -11,28 +11,41 @@ import UIKit
 import Crashlytics
 import Firebase
 import GameKit
+import EAIntroView
 
-class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterControllerDelegate {
+class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterControllerDelegate, EAIntroDelegate {
    
+   //MARK: Adのやつ
    let AdMobTEST_ID = "ca-app-pub-3940256099942544/2934735716"
    let AdMob_ID = "ca-app-pub-1460017825820383/5426911640"
-   
-   let LEADERBOARD_ID = "BestTimeLeaderBoard"
-   
    var BannerView: GADBannerView = GADBannerView()
    
+   //MARK: リーダボードID
+   let LEADERBOARD_ID = "BestTimeLeaderBoard"
+   //MARK: Viewのサイズ
    let ViewWidth = UIScreen.main.bounds.size.width
    let ViewHeight = UIScreen.main.bounds.size.height
    
+   //MARK: 広告の大きさ
    let AdViewHeight: CGFloat = 50
+   //広告の端数
+   let AdViewHeight_Fraction: CGFloat = 5
    
+   //MARK: ラベル群
    @IBOutlet weak var HeightScore: UILabel!
    @IBOutlet weak var StartButton: UIButton!
    
    var RankingButton = UIButton()
    var YourHightScoreLabel = UILabel()
    
+   //MARK: user defaults
    var userDefaults: UserDefaults = UserDefaults.standard
+   
+   //MARK: チュートリアルで使う。
+   let Tutoro1 = EAIntroPage()
+   let Tutoro2 = EAIntroPage()
+   let Tutoro3 = EAIntroPage()
+   let Tutoro4 = EAIntroPage()
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -40,7 +53,63 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
       InitLabel()
       InitButton()
       InitBannerView()
+      InitView()
+      InitUserInfomation()
       
+      if FirstOpenThisApp() == true {
+         InitTutorialView()
+         ShowTutorialView()
+      }
+   }
+   
+   //MARK:- チュートリアルの表示
+   func ShowTutorialView(){
+      
+      if UIDevice.current.userInterfaceIdiom != .phone {
+         return
+      }
+      
+      
+      let IntroViewFrame = CGRect(x: 0, y: 0, width: ViewWidth, height: ViewHeight)
+      
+      let IntroView = EAIntroView(frame: IntroViewFrame, andPages: [Tutoro1, Tutoro2, Tutoro3])
+      IntroView?.skipButton.setTitle("スキップ", for: UIControl.State.normal) //スキップボタン欲しいならここで実装！
+      IntroView?.delegate = self
+      IntroView?.show(in: self.view, animateDuration: 1.0)
+   }
+   
+   //MARK:- チュートリアルの初期化
+   func InitTutorialView() {
+      Tutoro1.bgImage = UIImage(named: "Swipe.png")
+      Tutoro2.bgImage = UIImage(named: "Erace.png")
+//      Tutoro3.title = "test"
+//      Tutoro3.desc = "note"
+      Tutoro3.bgImage = UIImage(named: "Until.png")
+//      Tutoro3.titleFont = UIFont(name: "Helvetica-Bold", size: 32)
+//      Tutoro3.titleColor = UIColor.orange
+//      Tutoro3.descPositionY = self.view.bounds.size.height / 2
+   }
+   
+   
+   
+   //MARK:- 初めて起動した(チュートリアルを出すかどうか)
+   func FirstOpenThisApp() -> Bool {
+
+      //first time
+      if userDefaults.object(forKey: "FirstOpen") == nil {
+         userDefaults.set(false, forKey: "FirstOpen")
+         userDefaults.synchronize()
+         return true
+      }else{
+         userDefaults.set(false, forKey: "FirstOpen")
+         userDefaults.synchronize()
+      }
+      
+      return false
+   }
+   
+   //MARK:- ユーザ情報の初期化を行う。特に，最高記録の取得を行う。
+   func InitUserInfomation() {
       //first time
       if userDefaults.object(forKey: "HeightScoreTime") == nil {
          HeightScore.text = NSLocalizedString("NoRecord", comment: "")
@@ -48,25 +117,29 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
          let NowUserHightScoreTime = userDefaults.float(forKey: "HeightScoreTime")
          HeightScore.text = String(NowUserHightScoreTime)
       }
-
-      view.backgroundColor = UIColor.init(displayP3Red: 51 / 255, green: 51 / 255, blue: 51 / 255, alpha: 1)
    }
    
+   //MARK:- Viewの初期化を行う
+   func InitView(){
+      view.backgroundColor = UIColor.init(displayP3Red: 51 / 255, green: 51 / 255, blue: 51 / 255, alpha: 1)
+   }
    
    //MARK:- 広告の初期化を行う。
    func InitBannerView() {
       
       #if DEBUG
-      print("\n\n--------INFO ADMOB--------------\n")
-      print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion() + "\n")
+         print("\n\n--------INFO ADMOB--------------\n")
+         print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion() + "\n")
          BannerView.adUnitID = AdMobTEST_ID
          print("バナー広告：テスト環境\n\n")
       #else
+         print("\n\n--------INFO ADMOB--------------\n")
+         print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion() + "\n")
          BannerView.adUnitID = AdMob_ID
          print("バナー広告：本番環境")
       #endif
       
-      BannerView.frame = CGRect(x: 0, y: ViewHeight - AdViewHeight - 5, width: ViewWidth, height: AdViewHeight)
+      BannerView.frame = CGRect(x: 0, y: ViewHeight - AdViewHeight - AdViewHeight_Fraction, width: ViewWidth, height: AdViewHeight)
       view.addSubview(BannerView)
       view.bringSubviewToFront(BannerView)
       
@@ -165,9 +238,6 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
    
    @IBAction func PlayGameButton(_ sender: Any) {
       
-     
-
-      
    }
    
    
@@ -184,7 +254,6 @@ class HomeViewController: UIViewController, GADBannerViewDelegate, GKGameCenterC
          HeightScore.text = String(NowUserHightScoreTime)
       }
    }
-   
    
    
    //MARK:- ADMOB

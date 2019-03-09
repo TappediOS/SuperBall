@@ -42,7 +42,7 @@ class GameSounds {
       do {
          audioPlayer2 = try AVAudioPlayer(contentsOf: sound, fileTypeHint:nil)
       } catch {
-         print("Do_Mokkinインスタンス作成失敗")
+         print("Re_Mokkinインスタンス作成失敗")
       }
       
       soundFilePath = Bundle.main.path(forResource: "Mi_Mokkin", ofType: "mp3")!

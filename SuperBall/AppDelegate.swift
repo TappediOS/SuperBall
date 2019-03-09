@@ -69,9 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       
       //Ads BannerView
-      GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383~3403383539")
+      //GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383~3403383539")
       //Ads BannerView
-      GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383~3403383539")
+     // GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383~3403383539")
       
       
       return true
