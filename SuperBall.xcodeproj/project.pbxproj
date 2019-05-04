@@ -48,7 +48,7 @@
 		BFC0709E222108E900C77026 /* Re2_Mokkin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFC07094222108E900C77026 /* Re2_Mokkin.mp3 */; };
 		BFE2CC8B2223C2CF00B03650 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFE2CC8D2223C2CF00B03650 /* Localizable.strings */; };
 		BFE2CC972223C87000B03650 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFE2CC992223C87000B03650 /* InfoPlist.strings */; };
-		BFFEA435221E815600A11712 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFFEA434221E815600A11712 /* Settings.bundle */; };
+		BFF6D5D0227D971C000253A2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BFF6D5CF227D971C000253A2 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,7 +124,7 @@
 		BFE2CC9E2223C87700B03650 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BFE2CC9F2223C87800B03650 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BFE2CCA02223C87900B03650 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BFFEA434221E815600A11712 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../../../Downloads/Settings.bundle; sourceTree = "<group>"; };
+		BFF6D5CF227D971C000253A2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CF2410840B7863D0EF7B64D4 /* Pods-SuperBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBall/Pods-SuperBall.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,10 +202,10 @@
 				BF2DEE3821DA1243000F140D /* Particle.swift */,
 				BF1F226221A3AFB40021DB8F /* Stage.swift */,
 				BF1F226421A3AFCE0021DB8F /* Referee.swift */,
+				BFF6D5CF227D971C000253A2 /* Settings.bundle */,
 				BFE2CC992223C87000B03650 /* InfoPlist.strings */,
 				BFE2CC8D2223C2CF00B03650 /* Localizable.strings */,
 				BFC0708A2221062D00C77026 /* GameSoundFile */,
-				BFFEA434221E815600A11712 /* Settings.bundle */,
 				BF1F225221A3AEF70021DB8F /* Main.storyboard */,
 				BF1F225521A3AEF70021DB8F /* Assets.xcassets */,
 				BF1F225721A3AEF70021DB8F /* LaunchScreen.storyboard */,
@@ -312,12 +312,12 @@
 				BF1F225621A3AEF70021DB8F /* Assets.xcassets in Resources */,
 				BFC07097222108E900C77026 /* Fa_Mokkin.mp3 in Resources */,
 				BFAA117F21DB55F9004BEFC7 /* RemoveParticle2.sks in Resources */,
+				BFF6D5D0227D971C000253A2 /* Settings.bundle in Resources */,
 				BF1511F822225FD600D7F4EE /* GoogleService-Info.plist in Resources */,
 				BFC07095222108E900C77026 /* So_Mokkin.mp3 in Resources */,
 				BFE2CC972223C87000B03650 /* InfoPlist.strings in Resources */,
 				BFC07098222108E900C77026 /* Mi_Mokkin.mp3 in Resources */,
 				BFAA118521DB55F9004BEFC7 /* RemoveParticle.sks in Resources */,
-				BFFEA435221E815600A11712 /* Settings.bundle in Resources */,
 				BFC0709D222108E900C77026 /* Re_Mokkin.mp3 in Resources */,
 				BFE2CC8B2223C2CF00B03650 /* Localizable.strings in Resources */,
 				BFC07096222108E900C77026 /* Mi2_Mokkin.mp3 in Resources */,
@@ -396,7 +396,7 @@
 		};
 		BFC01F0521B4B85000D1D2C0 /* LicensePlist */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -408,9 +408,9 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ $CONFIGURATION = \"Debug\" ]; then\ncd $SRCROOT\n/usr/local/bin/license-plist --output-path $SuperBall/Settings.bundle\nfi\n";
+			shellScript = "if [ $CONFIGURATION = \"Debug\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path $PRODUCT_NAME/Settings.bundle\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -624,6 +624,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
 				INFOPLIST_FILE = SuperBall/Info.plist;
@@ -635,6 +636,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -644,6 +646,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
 				INFOPLIST_FILE = SuperBall/Info.plist;
@@ -655,6 +658,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

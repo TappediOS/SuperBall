@@ -21,7 +21,8 @@ class Particles {
       let Intarnal = ViewX / 25
       let FirstZure = -ViewX * 2 / 5   //位置ズレ防止
       let x1 = FirstZure + Intarnal * x + Wide * (x - 1)
-      let y1 = -ViewY * 3 / 8 + Intarnal * y + Wide * (y - 1)
+      var y1 = -ViewY * 3 / 8 + Intarnal * y
+      y1 += Wide * (y - 1)
       
       
       

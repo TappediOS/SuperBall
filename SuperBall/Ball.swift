@@ -53,7 +53,8 @@ class ball :SKSpriteNode {
       let Intarnal = ViewX / 25
       let FirstZure = -ViewX * 2 / 5   //位置ズレ防止
       let x1 = FirstZure + Intarnal * BallPositionX + Wide * (BallPositionX - 1)
-      let y1 = -ViewY * 3 / 8 + Intarnal * BallPositionY + Wide * (BallPositionY - 1)
+      var y1 = -ViewY * 3 / 8 + Intarnal * BallPositionY
+      y1 +=  Wide * (BallPositionY - 1)
       
       let texture: SKTexture
       

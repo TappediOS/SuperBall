@@ -476,10 +476,6 @@ class GameScene: SKScene {
          let NowUserHightScoreTime = userDefaults.float(forKey: "HeightScoreTime")
          GameSetView.showSuccess(NSLocalizedString("Passed", comment: ""), subTitle: "\(tiime)\n\(FinTime)\n\n\(YourBestTime)\n\(NowUserHightScoreTime)")
       }
-      
-      
-      
-      
    }
    
    //MARK:- スコアを上げる関数
