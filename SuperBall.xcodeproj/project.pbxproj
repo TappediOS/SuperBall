@@ -180,16 +180,7 @@
 			children = (
 				BF1F224821A3AEF70021DB8F /* AppDelegate.swift */,
 				BF1F224A21A3AEF70021DB8F /* GameScene.sks */,
-				BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */,
-				BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */,
-				BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */,
-				BFAA117A21DB55F9004BEFC7 /* RemoveParticle4.sks */,
-				BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */,
-				BFAA117821DB55F8004BEFC7 /* RemoveParticle6.sks */,
-				BFAA117621DB55F8004BEFC7 /* RemoveParticle7.sks */,
-				BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */,
-				BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */,
-				BFAA117721DB55F8004BEFC7 /* RemoveParticle10.sks */,
+				BFF6D7A02296BA66000253A2 /* Particles */,
 				BF1F224C21A3AEF70021DB8F /* Actions.sks */,
 				BF1F226621A542110021DB8F /* ExNotiificationName.swift */,
 				BF1F225021A3AEF70021DB8F /* GameViewController.swift */,
@@ -231,6 +222,23 @@
 			);
 			name = GameSoundFile;
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		BFF6D7A02296BA66000253A2 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				BFAA117B21DB55F9004BEFC7 /* RemoveParticle.sks */,
+				BFAA117521DB55F8004BEFC7 /* RemoveParticle2.sks */,
+				BFAA117921DB55F8004BEFC7 /* RemoveParticle3.sks */,
+				BFAA117A21DB55F9004BEFC7 /* RemoveParticle4.sks */,
+				BFAA117C21DB55F9004BEFC7 /* RemoveParticle5.sks */,
+				BFAA117821DB55F8004BEFC7 /* RemoveParticle6.sks */,
+				BFAA117621DB55F8004BEFC7 /* RemoveParticle7.sks */,
+				BFAA117D21DB55F9004BEFC7 /* RemoveParticle8.sks */,
+				BFAA117421DB55F8004BEFC7 /* RemoveParticle9.sks */,
+				BFAA117721DB55F8004BEFC7 /* RemoveParticle10.sks */,
+			);
+			path = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
