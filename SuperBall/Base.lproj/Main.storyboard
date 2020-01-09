@@ -22,7 +22,7 @@
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="PlayGameButton:" destination="fwi-By-jLh" eventType="touchUpInside" id="U21-hi-Vgd"/>
-                                    <segue destination="BV1-FR-VrT" kind="presentation" modalPresentationStyle="fullScreen" id="qei-TH-pdJ"/>
+                                    <segue destination="BV1-FR-VrT" kind="presentation" modalPresentationStyle="overFullScreen" id="qei-TH-pdJ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b58-fy-chS">
