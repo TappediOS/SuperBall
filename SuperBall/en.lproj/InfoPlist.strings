@@ -6,4 +6,5 @@
   Copyright © 2019 jun. All rights reserved.
 */
 
+//アプリ開発の名前を表す。
 CFBundleDisplayName = "1750";
